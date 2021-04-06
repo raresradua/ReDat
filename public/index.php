@@ -13,14 +13,15 @@
     include ("../templates/navbar.php");
 ?>
 
-<main>
-    <h1> TODO </h1>
-</main>
 
+<?php
+    include ("../templates/main-content.php")
+?>
 <?php
     include ("../templates/footer.php");
 ?>
-
 </body>
+
+
 
 </html>
