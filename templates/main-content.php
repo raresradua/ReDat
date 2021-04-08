@@ -6,7 +6,7 @@
         <section id="list-tables">
             <div id="tables">
                 <h2>1st table</h2>
-                <table>
+                <table id="tablestyle">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -20,45 +20,203 @@
                             <td>memes</td>
                             <td>23%</td>
                         </tr>
-                    </tbody>
-                </table>
-            </div><div id="tables">
-                <h2>2nd table</h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Subreddit</th>
-                        <th>Growth %</th>
-                    </tr> 
-                    </thead>
-                    <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>memes</td>
-                            <td>23%</td>
+                            <td>2</td>
+                            <td>cats</td>
+                            <td>10%</td>
                         </tr>
-                    </tbody>
-                </table>
-            </div><div id="tables">
-                <h2>3rd table</h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Subreddit</th>
-                        <th>Growth %</th>
-                    </tr> 
-                    </thead>
-                    <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>memes</td>
-                            <td>23%</td>
+                            <td>3</td>
+                            <td>cats</td>
+                            <td>10%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>oops</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>dogs</td>
+                            <td>10%</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <div id="tables">
+                <h2>2nd table</h2>
+                <table id="tablestyle">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Subreddit</th>
+                        <th>Growth %</th>
+                    </tr> 
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>memes</td>
+                            <td>23%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>cats</td>
+                            <td>10%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>cats</td>
+                            <td>10%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>oops</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>dogs</td>
+                            <td>10%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tables">
+                <h2>3rd table</h2>
+                <table id="tablestyle">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Subreddit</th>
+                        <th>Growth %</th>
+                    </tr> 
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>memes</td>
+                            <td>23%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>cats</td>
+                            <td>10%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>bats</td>
+                            <td>10%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="top-posts">
+            <div id="chooseTopPostsOption">
+                <b>
+                    Top Posts
+                </b>
+                &nbsp;
+                <select name="ChooseOption" id="topPosts">
+                    <option value="today">Today</option>
+                    <option value="week">This week</option>
+                    <option value="month">This month</option>
+                    <option value="year">This year</option>
+                </select>
+            </div>
+
+            <div class="topPostsTable">
+                <table id="tableTopPosts">
+                    <thead>
+                        <tr>
+                            <th>Comments</th>
+                            <th>Post</th>
+                            <th>Posted by</th>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                    <tr>
+                            <td>
+                                12.2k
+                            </td>
+                            <td>
+                                <a href="#">post</a>
+                            </td>
+                            <td>
+                                <a href="#">/u/Something</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                12.2k
+                            </td>
+                            <td>
+                                <a href="#">post</a>
+                            </td>
+                            <td>
+                                <a href="#">/u/Something</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                12.2k
+                            </td>
+                            <td>
+                                <a href="#">post</a>
+                            </td>
+                            <td>
+                                <a href="#">/u/Something</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+        <div id="subscribersChart">
+            <b>
+                Subscribers
+            </b>
+        </div>
+        <svg class="chart" style="margin: 6% 0">
+
+        
+  
+            <polyline
+                fill="none"
+                stroke="#283618"
+                stroke-width="2"
+                points="
+                00,120
+                20,60
+                40,80
+                60,20
+                80,80
+                100,80
+                120,60
+                140,100
+                160,90
+                180,80
+                200, 110
+                220, 10
+                240, 70
+                260, 100
+                280, 100
+                300, 40
+                320, 0
+                340, 100
+                360, 100
+                380, 120
+                400, 60
+                420, 70
+                440, 80
+            "
+            />
+  
+        </svg>
         </section>
 
         <section>

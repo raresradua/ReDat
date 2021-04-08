@@ -4,9 +4,6 @@ html {
     font-size: 14px;
 }
 
-
-/* width */
-
 ::-webkit-scrollbar {
     width: 0.5em;
     height: 0.3em;
@@ -144,10 +141,97 @@ nav {
 }
 
 #tables {
-    height: 20%;
-    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    width: 25vh;
+    border: 2px solid #283618;
     padding: 1.5% 2%;
-    margin: 5% 0;
+    margin: 5% 6%;
+    border-radius: 0.5em;
+}
+
+#tables>h2 {
+    border-bottom: 1px solid #283618;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+#tablestyle {
+    margin: 6% 0;
+    width: 100%;
+    background-color: rgba(165, 165, 141, 1);
+    border-radius: 0.5em;
+}
+
+#tablestyle>thead>tr>th {
+    padding: 4% 6%;
+}
+
+#tablestyle>tbody>tr:nth-child(odd),
+#tableTopPosts>tbody>tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#tablestyle>tbody>tr>td,
+#tableTopPosts>tbody>tr>td {
+    border-radius: 0.2em;
+    font-size: 1.1em;
+    font-weight: 550;
+}
+
+#tablestyle>tbody>tr:nth-child(even),
+#tableTopPosts>tbody>tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#tableTopPosts {
+    width: 100%;
+    margin: 0 0;
+    margin-top: 3%;
+    margin-bottom: 6%;
+    background-color: rgba(165, 165, 141, 1);
+    border-radius: 0.5em;
+}
+
+#tableTopPosts>thead {
+    text-align: left;
+}
+
+#tableTopPosts>thead>tr>th:nth-child(3) {
+    width: 20%;
+}
+
+#tableTopPosts>thead>tr>th:nth-child(1) {
+    width: 10%;
+}
+
+#chooseTopPostsOption,
+#subscribersChart {
+    font-size: 1.7em;
+    border-bottom: 2px solid #283618;
+    padding: 0.5em 0;
+    border-width: 0.15em;
+}
+
+#topPosts {
+    font-size: 0.7em;
+    font-weight: bold;
+    background-color: rgba(165, 165, 141, 1);
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+#topPosts:active {
+    font-size: 0.6em;
+}
+
+.chart {
+    width: 30%;
+    height: 40%;
+    border-left: 1px dotted #555;
+    border-bottom: 1px dotted #555;
+    padding: 20px 20px 20px 0;
 }
 
 section>p {
