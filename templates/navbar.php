@@ -7,7 +7,11 @@
             <span class="bar"></span>
         </div>
         <ul class="nav-menu">
-            <li><a href="#" class="nav-links">Something</a></li>
+            <li>
+                <form action="/search/" method="get">
+                    <input type="search" placeholder="Search">
+                </form>
+            </li>
             <li><a href="#" class="nav-links">Something</a></li>
             <li><a href="#" class="log-out">Log out</a></li>
         </ul>
