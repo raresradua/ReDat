@@ -97,6 +97,22 @@ nav {
     transition: all 0.3s ease-in;
 }
 
+input[type=search] {
+    font-size: 1.8em;
+    color: #283618;
+    font-weight: bold;
+    border-radius: 0.5em;
+    border-color: #283618;
+    background-color: transparent;
+    padding-left: 4%;
+}
+
+input[type=search]:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+}
+
 .log-out {
     font-size: 1.8em;
     color: #283618;
@@ -308,7 +324,7 @@ footer {
     }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1050px) {
     .nav-box {
         position: -webkit-sticky;
         position: sticky;
@@ -342,6 +358,7 @@ footer {
         transition: all 0.5s ease;
     }
     .nav-links {
+        margin-top: 0.5%;
         text-align: center;
         line-height: 60px;
         color: #283618;
@@ -354,6 +371,11 @@ footer {
         background-color: #283618;
         color: white;
         transition: all 0.4s ease-out;
+    }
+    input[type=search] {
+        margin-top: 0.3%;
+        line-height: 50px;
+        border-width: 1.2px;
     }
     .log-out {
         line-height: 60px;
