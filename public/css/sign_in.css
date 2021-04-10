@@ -1,0 +1,43 @@
+html {
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+
+#container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.left-panel {
+    height: 200px;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+}
+
+.left-panel .description {
+    color: black;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+}
+
+.description .p {
+    font-weight: 400;
+}
+
+.left-panel, .right-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-panel form{
+    width: 328px;
+}
+
+.right-panel .description {
+    color: purple;
+    text-align: center;
+}
