@@ -12,24 +12,25 @@
 
 <main>
     <div id="container">
-
         <div class="left-panel">
             <div class="description">
                 <h1>ReDAT</h1>
                 <p>You can use ReDAT to monitor your favorite subreddits and get various statistics about posts, users and more. </p>
             </div>
         </div>
-
         <div class="right-panel">
             <button class="sign-in-btn" type="submit"> Sign In</button>
             <section class="description">
                 <p><span class="small">You will be redirected to reddit.com for authentication.</span></p>
             </section>
         </div>
-
     </div>
 
 </main>
+
+<?php
+    include("../templates/footer.php");
+?>
 
 </body>
 
