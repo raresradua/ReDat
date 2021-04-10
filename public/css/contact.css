@@ -1,0 +1,74 @@
+html {
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+
+body {
+    height: 98vh;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 85%;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+#titleMessage {
+    text-align: center;
+    font-size: 3.5em;
+    font-weight: bold;
+    color: #283618;
+    margin-left: 0.65em;
+    height: 150px;
+}
+
+#inputText>input {
+    font-size: 2em;
+    color: #283618;
+    margin: 1% 0;
+    border: 1px solid #283618;
+    border-radius: 1em;
+    padding: 2% 3%;
+    width: 50vw;
+}
+
+#inputMessage>textarea {
+    font-size: 2em;
+    color: #283618;
+    width: 50vw;
+    resize: none;
+    margin: 1% 0;
+    border: 1px solid #283618;
+    border-radius: 1em;
+    padding: 2% 3%;
+}
+
+#inputMessage {
+    width: 50vw;
+}
+
+.send-button {
+    font-size: 1.5em;
+    color: #283618;
+    width: 15vw;
+    resize: none;
+    border: 1px solid #283618;
+    border-radius: 1em;
+    padding: 2% 3%;
+    margin-left: 37%;
+}
+
+footer {
+    margin-left: 0;
+    width: 100%;
+}
