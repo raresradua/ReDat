@@ -29,7 +29,7 @@
             <textarea name="message" id="message" placeholder="Your Message"></textarea>
                             
             </div>
-
+            <button class="send-button" type="submit"> Send </button>
         </form>
     </div>
     
