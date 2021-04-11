@@ -6,9 +6,11 @@
     <title>ReDat</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body class = "index-body">
+
 <?php
     include ("../templates/navbar.php");
 ?>
@@ -19,12 +21,7 @@
 <?php
     include ("../templates/footer.php");
 ?>
+
+
 </body>
-
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> main
 </html>

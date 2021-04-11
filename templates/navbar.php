@@ -9,10 +9,10 @@
         <ul class="nav-menu">
             <li>
                 <form action="/search/" method="get">
-                    <input type="search" placeholder="Search">
+                    <input type="search" placeholder="/r/Subreddit">
                 </form>
             </li>
-            <li><a href="#" class="nav-links">Something</a></li>
+            <li><a href="#" class="nav-links">API</a></li>
             <li><a href="#" class="log-out">Log out</a></li>
         </ul>
     </nav>
