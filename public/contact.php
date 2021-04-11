@@ -13,7 +13,7 @@
 <body>
 <section>
     <div class="contactForm">
-        <form action="contact">
+        <form class="userContact" action="contact">
             <div id="titleMessage">
             <span>SEND US A MESSAGE</span>
             </div>
