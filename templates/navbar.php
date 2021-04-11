@@ -1,6 +1,6 @@
 <div class="nav-box">
     <nav>
-        <h1 id="logo">ReDAT</h1>
+        <h1 id="logo"> <a class="logo-a" href="../public/index.php">ReDAT </a></h1>
         <div class="menu-toggle" id="mobile-menu">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -12,7 +12,7 @@
                     <input type="search" placeholder="/r/Subreddit">
                 </form>
             </li>
-            <li><a href="#" class="nav-links">API</a></li>
+            <li><a href="../public/api.php" class="nav-links">API</a></li>
             <li><a href="#" class="log-out">Log out</a></li>
         </ul>
     </nav>

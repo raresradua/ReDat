@@ -21,6 +21,36 @@ html {
     border: 1px solid grey;
 }
 
+ .logo-a, .logo-a:visited, .logo-a:hover, .logo-a:active{
+     text-decoration: none;
+     color: #283618;
+ }
+
+h1 {
+    text-align: center;
+}
+
+ .key-value{
+     background: rgba(10,20,30,0.23);
+     border: 1px solid #283618;
+     padding: 1px 1px;
+     border-width: 1px;
+     text-indent: 5%;
+ }
+ .key {
+     color: #6a040f;
+     font-weight: bolder;
+ }
+
+ .value {
+    color: #faa307;
+     font-weight: bold;
+ }
+
+ .api-text > ul > li {
+     height: 100px;
+ }
+
 .index-body {
     background: linear-gradient(-45deg, #cb997e, #ddbea9, #ffe8d6, #b7b7a4);
     background-size: 10000%;
@@ -256,6 +286,29 @@ section>p {
     border-width: 0.2em;
     font-size: 1.2em;
     text-indent: 5%;
+}
+
+.api-text{
+    border: 1px solid #283618;
+    padding: 0.5em 0.5em;
+    border-width: 0.2em;
+    font-size: 1.2em;
+    text-indent: 5%;
+}
+
+pre {
+    background-color: rgba(0,0,0,0);;
+    border-left: 3px solid black;
+    color: #666;
+    page-break-inside: avoid;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
 }
 
 footer {
