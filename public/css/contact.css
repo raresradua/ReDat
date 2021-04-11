@@ -16,6 +16,12 @@ section {
     height: 85%;
 }
 
+.userContact {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 .contactForm {
     display: flex;
     flex-direction: row;
@@ -24,12 +30,20 @@ section {
 }
 
 #titleMessage {
+    display: flex;
+    justify-content: center;
+    width: 100%;
     text-align: center;
     font-size: 3.5em;
     font-weight: bold;
     color: #283618;
     margin-left: 0.65em;
     height: 150px;
+}
+
+#inputText {
+    display: flex;
+    justify-content: center;
 }
 
 #inputText>input {
@@ -42,19 +56,21 @@ section {
     width: 50vw;
 }
 
+#inputMessage {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 #inputMessage>textarea {
+    width: 50vw;
     font-size: 2em;
     color: #283618;
-    width: 50vw;
     resize: none;
     margin: 1% 0;
     border: 1px solid #283618;
     border-radius: 1em;
     padding: 2% 3%;
-}
-
-#inputMessage {
-    width: 50vw;
 }
 
 .send-button {
@@ -72,3 +88,5 @@ footer {
     margin-left: 0;
     width: 100%;
 }
+
+@media screen and (max-width: 1130px) {}
