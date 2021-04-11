@@ -250,6 +250,127 @@ input[type=search]:hover {
     padding: 20px 20px 20px 0;
 }
 
+.graphs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: auto;
+}
+
+.graphsOptions {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.graphsOptionsButton {
+    background: none;
+    border: none;
+}
+
+.graphsOptionsButton>span {
+    font-size: 4em;
+}
+
+.graphsOptionsButton>span:hover {
+    color: #a3b18a;
+    text-shadow: black 1px 0 2px;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+}
+
+.graphsFilters {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.downloadAs {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chooseBtn {
+    font-weight: bold;
+    font-size: 1em;
+    background: none;
+    border: none;
+}
+
+.chooseBtn:hover {
+    cursor: pointer;
+    color: #a3b18a;
+    text-shadow: black 1px 0 2px;
+    transition: all 0.2s ease-in;
+}
+
+.chooseBtn:focus {
+    color: #a3b18a;
+    text-shadow: black 1px 0 2px;
+}
+
+.dwnldBtn {
+    background: none;
+    border: none;
+    color: #283618;
+}
+
+.dwnldBtn:hover {
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+}
+
+#filter {
+    font-size: 1em;
+    font-weight: bold;
+    background-color: rgba(165, 165, 141, 1);
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+#filter:active {
+    font-size: 0.6em;
+}
+
+.chooseUsers {
+    margin-top: 1%;
+}
+
+#searchUsers {
+    border-radius: 1em;
+    padding-left: 5%;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#userList {
+    list-style: none;
+    margin-top: 0;
+    padding-left: 1%;
+    background-color: rgba(165, 165, 141, 1);
+    border: 1px solid #283618;
+    border-radius: 1em;
+    width: 89%;
+}
+
+#searchUsers:hover {
+    cursor: pointer;
+}
+
+#userList>li>label>input {
+    margin-right: 6%;
+}
+
+#userList>li {
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
 section>p {
     border: 1px solid #283618;
     padding: 0.5em 0.5em;
@@ -321,6 +442,20 @@ footer {
     }
     100% {
         background-position: 0 50%;
+    }
+}
+
+@media screen and (max-width: 1427px) {
+    .graphs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .graphsOptions {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
     }
 }
 
