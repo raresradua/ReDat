@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReDAT</title>
+</head>
+<body>
+    <article resource="#" typeof="schema:ScholarlyArticle">
+        <h1 property="schema:name"> Documentatie ReDAT </h1>
+        <div class="contentinfo">
+            <section typeof="sa:AuthorsList">
+                <h2>Autori</h2>
+                <ul>
+                    <li typeof="sa:ContributorRole" property="schema:author">
+                        <span typeof="schema:Person"
+                              resource="https://github.com/vladcociorva/">
+                            <meta property="schema:givenName" content="Vlad">
+                            <meta property="schema:additionalName" content="Iulian">
+                            <meta property="schema:familyName" content="Cociorva">
+                            <span property="schema:name">Vlad Iulian Cociorva </span>
+                        </span>
+                    </li>
+                    <li typeof="sa:ContributorRole" property="schema:author">
+                        <span typeof="schema:Person"
+                              resource="https://github.com/raresradua/">
+                            <meta property="schema:givenName" content="Rares">
+                            <meta property="schema:additionalName" content="Aurelian">
+                            <meta property="schema:familyName" content="Radu">
+                            <span property="schema:name">Rares Aurelian Radu </span>
+                        </span>
+                    </li>
+                </ul>
+            </section>
+
+            <section typeof="sa:license">
+                <h2> Licenta </h2>
+                <a href="https://en.wikipedia.org/wiki/MIT_License" property="schema:license" typeof="CreativeWork"> MIT License </a>
+            </section>
+
+        </div>
+
+        <section>
+            <h2>1. Introducere </h2>
+            <p>Datorita popularitatii platformei <a href="https://reddit.com">Reddit</a>, se doreste a realiza o
+                aplicatie care sa monitorizeze comunitatile (subreddit-urile) pe care un utilizator le urmareste pentru
+                a oferi o vizualizare ampla asupra anumitor informatii precum activitatea utilizatorilor (postari,
+                comentarii, upvote-uri, downvote-uri etc.) sub forma de statistici.
+            </p>
+        </section>
+
+        <section>
+            <h2>2. Descrierea aplicatiei </h2>
+            <p>Principalele componente ale produsului sunt specificate in imaginea de mai jos: </p>
+            <img src="arhitectura.svg" alt="">
+        </section>
+
+    </article>
+</body>
+</html>
