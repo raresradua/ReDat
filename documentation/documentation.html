@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>ReDAT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
 </head>
+
 <body>
     <article resource="#" typeof="schema:ScholarlyArticle">
         <h1 property="schema:name"> Documentatie ReDAT </h1>
@@ -12,8 +16,7 @@
                 <h2>Autori</h2>
                 <ul>
                     <li typeof="sa:ContributorRole" property="schema:author">
-                        <span typeof="schema:Person"
-                              resource="https://github.com/vladcociorva/">
+                        <span typeof="schema:Person" resource="https://github.com/vladcociorva/">
                             <meta property="schema:givenName" content="Vlad">
                             <meta property="schema:additionalName" content="Iulian">
                             <meta property="schema:familyName" content="Cociorva">
@@ -21,8 +24,7 @@
                         </span>
                     </li>
                     <li typeof="sa:ContributorRole" property="schema:author">
-                        <span typeof="schema:Person"
-                              resource="https://github.com/raresradua/">
+                        <span typeof="schema:Person" resource="https://github.com/raresradua/">
                             <meta property="schema:givenName" content="Rares">
                             <meta property="schema:additionalName" content="Aurelian">
                             <meta property="schema:familyName" content="Radu">
@@ -41,54 +43,93 @@
 
         <section>
             <h2>1. Introducere </h2>
-            <p>Datorita popularitatii platformei <a href="https://reddit.com">Reddit</a>, se doreste a realiza o
-                aplicatie care sa monitorizeze comunitatile (subreddit-urile) pe care un utilizator le urmareste pentru
-                a oferi o vizualizare ampla asupra anumitor informatii precum activitatea utilizatorilor (postari,
-                comentarii, upvote-uri, downvote-uri etc.) sub forma de statistici.
+            <p>Datorita popularitatii platformei <a href="https://reddit.com">Reddit</a>, se doreste a realiza o aplicatie care sa monitorizeze comunitatile (subreddit-urile) pe care un utilizator le urmareste pentru a oferi o vizualizare ampla asupra anumitor
+                informatii precum activitatea utilizatorilor (postari, comentarii, upvote-uri, downvote-uri etc.) sub forma de statistici.
             </p>
         </section>
 
         <section>
             <h2>2. Descrierea aplicatiei </h2>
             <p>Principalele componente ale produsului sunt specificate in imaginea de mai jos: </p>
-            <img src="./images/arhitectura.svg" alt="Arhitectura">
+            <div class="image">
+                <img src="./images/arhitectura.svg" alt="Arhitectura">
+            </div>
 
-            <p> Aplicatia poate fi folosita dupa autentificarea cu contul de Reddit. In acest mod se pot monitoriza
-                comunitatile la care este abonat utilizatorul autentificat.
+
+            <p> Aplicatia poate fi folosita dupa autentificarea cu contul de Reddit. In acest mod se pot monitoriza comunitatile la care este abonat utilizatorul autentificat.
             </p>
-            <p>  De asemenea se poate folosi API-ul pus la dispozitie pentru a face request-uri catre server,
-                fara a folosi front-end-ul, in caz ca se doreste acest lucru, pentru a obtine statistici generale, despre
-                diferite comunitati.
+            <p> De asemenea se poate folosi API-ul pus la dispozitie pentru a face request-uri catre server, fara a folosi front-end-ul, in caz ca se doreste acest lucru, pentru a obtine statistici generale, despre diferite comunitati.
             </p>
         </section>
 
         <section>
             <h2>3. Paginile aplicatiei</h2>
 
-            <h3> Sign in</h3>
-            <p></p>
+            <h3> 3.1 Sign in</h3>
+            <p>Aceasta pagina este pagina care se va deschide prima data, iar user-ul va trebui sa apase pe butonul de Sign In pentru a se autentifica cu contul sau de Reddit pentru a putea vedea statisticile pentru subredditurile la care aceste este abonat.
+            </p>
 
-            <h3> Pagina principala</h3>
-            <p></p>
+            <div class="image">
+                <img src="./images/sign-in-page.png" alt="SingIn">
+            </div>
+            <h3> 3.2 Pagina principala</h3>
+            <p>Dupa ce user-ul se autentifica, va fi redirectionat pe aceasta pagina, care va pune la dispozitie informatii legate de un anumit subreddit. Cateva dintre informatiile pe care le va putea vizualiza constau in cele mai populare postari, cine
+                le-a postat, numarul de comentarii. Acesta va putea vedea si diagrame de tip scatter plots, bar plots, pie charts pe care le va putea filtra in functie de numarul postarilor, cand s-au postat si cine le-a postat. De asemenea, va putea
+                vedea comparatii intre userii cei mai activi ale acelui subreddit. Aceste diagrame vor putea fi descarcate in format SVG sau CSV.
+            </p>
 
-            <h3> Documentatia API-ului</h3>
-            <p></p>
+            <div class="carousel">
+                <nav class="nav-carousel">
+                    <a href="#first"><img class="nav-img" src="./images/main-page-1.png" alt="First"></a>
+                    <a href="#second"><img class="nav-img" src="./images/main-page-2.png" alt="Second"></a>
+                    <a href="#third"><img class="nav-img" src="./images/main-page-3.png" alt="Third"></a>
+                </nav>
 
-            <h3> Contact</h3>
-            <p></p>
+                <div class="img-gallery">
+                    <img id="first" src="./images/main-page-1.png" alt="First">
+                    <img id="second" src="./images/main-page-2.png" alt="Second">
+                    <img id="third" src="./images/main-page-3.png" alt="Third">
+                </div>
+            </div>
+
+
+            <h3> 3.3 Documentatia API-ului</h3>
+            <p>In aceasta pagina se ofera documentatia API-ului oferit de aplicatia noastra web.</p>
+            <br>
+            <p>Este prezentata structura fisierului JSON precum si exemple pentru request-uri si raspunsuri</p>
+            <div class="image">
+                <img src="./images/api.png" alt="api">
+            </div>
+            <h3> 3.4 Contact</h3>
+            <p>Aceasta pagina este destinata utilizatorilor care doresc sa ia contact cu echipa ReDat si pentru a le trimite un mesaj, feedback sau pentru a putea le pune intrebari.</p>
+            <br>
+            <p>Utilizatorii trebuie sa ofera numele complet, o adresa de email valida si un mesaj pentru echipa ReDat.</p>
 
         </section>
 
         <section>
-            <h2> 4. Referinte </h2>
+            <h2>4. Navigation Bar si Footer</h2>
+
+            <h3> 4.1 Navigation Bar</h3>
+            <p>Bara de navigatie consta intr-o bara de cautare in care user-ul logat poate introduce numele unui subreddit si astfel va putea vizualiza statistici pentru acesta</p>
+            <br>
+            <p>De asemenea sunt si doua butoane. Butonul API redirectioneaza user-ul spre pagina care contine documentatia API-ului. Butonul LogOut va deloga user-ul.</p>
+            <h3> 4.2 Footer</h3>
+            <p>Footer-ul contine doua butoane. Butonul GitHub va deschide intr-un nou tab repo-ul aplicatiei ReDat. Butonul ContactUs va redirectiona user-ul catre pagina de Contact.</p>
+        </section>
+
+        <section>
+            <h2> 5. Referinte </h2>
             <ul>
                 <li> <a href="https://developer.mozilla.org/en-US/">MDN</a></li>
                 <li> <a href="https://profs.info.uaic.ro/~busaco/teach/courses/web/"> TW Course</a></li>
                 <li> <a href="https://subredditstats.com/"> Subreddit Stats</a></li>
                 <li> <a href="https://plotly.com/"> Plotly </a></li>
+                <li><a href="https://coolors.co/palettes/trending">Coolors</a></li>
             </ul>
         </section>
 
     </article>
 </body>
+
 </html>
