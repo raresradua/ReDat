@@ -5,6 +5,7 @@ define('URLROOT', 'http://localhost/ReDat');
 define('SITENAME', 'ReDat');
 
 define('CLIENT_ID', 'fT6K-sNPAMkRbA');
+define('CLIENT_SECRET', 'gZZMK_IFDYhdr93FPAl6nb1BUmHW-g');
 define('BASE64_APP_CREDENTIALS', 'ZlQ2Sy1zTlBBTWtSYkE6Z1paTUtfSUZEWWhkcjkzRlBBbDZuYjFCVW1IVy1n');
 
 

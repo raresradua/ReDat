@@ -1,92 +1,52 @@
 <?php
 
-require_once 'Response.php';
-
 class Request {
 
-    private $httpMethod;
-    private $url;
-    private $headers = array();
-    private $postVariables = array();
-    private $cookies = array();
-    private $body;
+    public static function runCurl($url, $postVals = null, $headers = null,
+                             $auth = false, $authMode = 'basic', $token_type = null, $access_token = null){
+        $ch = curl_init($url);
 
-    public function setHttpMethod($httpMethod)
-    {
-        $this->httpMethod = $httpMethod;
-    }
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    public function setHeader($name, $value)
-    {
-        $this->headers[$name] = $value;
-    }
-
-    public function setCookie($name, $value)
-    {
-        $this->cookies[$name] = $value;
-
-        $cookieAscii = '';
-
-        foreach ($this->cookies as $name => $value) {
-            $cookieAscii .= " {$name}={$value};";
-        }
-
-        $this->setHeader('Cookie', $cookieAscii);
-    }
-
-    public function setBody($body)
-    {
-        $this->body = $body;
-    }
-
-    public function setPostVariable($name, $value)
-    {
-        $this->sethttpMethod('POST');
-        $this->postVariables[$name] = $value;
-        $this->body = http_build_query($this->postVariables);
-    }
-
-    public function getResponse()
-    {
-        $parameters = array(
-            'http' => array(
-                'method'  => $this->httpMethod,
-                'content' => $this->body,
-                'header'  => $this->getHeadersAsAscii(),
-            ),
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => 10
         );
 
-        $stream = stream_context_create($parameters);
-        $handle = @fopen($this->url, 'rb', false, $stream);
-
-        if (!is_resource($handle)) {
-            return null;
+        if (!empty($_SERVER['HTTP_USER_AGENT'])){
+            $options[CURLOPT_USERAGENT] = $_SERVER['HTTP_USER_AGENT'];
         }
 
-        $streamMetaData = stream_get_meta_data($handle);
-        $streamContents = stream_get_contents($handle);
-
-        $headers = $streamMetaData['wrapper_data'];
-        $body    = $streamContents;
-
-        return new Response($headers, $body);
-    }
-
-    private function getHeadersAsAscii()
-    {
-        $headerAscii = '';
-
-        foreach ($this->headers as $name => $value) {
-            $headerAscii .= "{$name}: {$value}\r\n";
+        if ($postVals != null){
+            $options[CURLOPT_POSTFIELDS] = $postVals;
+            $options[CURLOPT_CUSTOMREQUEST] = "POST";
         }
 
-        $headerAscii .= "\r\n";
+        if ($authMode == 'oauth') {
+            $headers = array("Authorization: {$token_type} {$access_token}");
+            $options[CURLOPT_HEADER] = false;
+            $options[CURLINFO_HEADER_OUT] = false;
+            $options[CURLOPT_HTTPHEADER] = $headers;
+        }
 
-        return $headerAscii;
+        if ($auth){
+            $options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
+            $options[CURLOPT_USERPWD] = CLIENT_ID . ":" . CLIENT_SECRET;
+            $options[CURLOPT_SSLVERSION] = 4;
+            $options[CURLOPT_SSL_VERIFYPEER] = false;
+            $options[CURLOPT_SSL_VERIFYHOST] = 2;
+        }
+
+        curl_setopt_array($ch, $options);
+        $apiResponse = curl_exec($ch);
+        $response = json_decode($apiResponse);
+
+        //check if non-valid JSON is returned
+        if ($error = json_last_error()){
+            $response = $apiResponse;
+        }
+        curl_close($ch);
+
+        return $response;
     }
 
 }

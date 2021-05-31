@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="right-panel">
-            <form action=<?php data['authUrl'] ?> method="post">
+            <form action=<?php echo $data['authUrl'] ?> method="post">
                 <button class="sign-in-btn" type="submit"> Sign In</button>
             </form>
             <section class="description">
