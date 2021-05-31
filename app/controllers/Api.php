@@ -5,6 +5,12 @@ class Api extends Controller {
     }
 
     public function index() {
-        $this->view('api');
+        if(isset($_COOKIE['reddit_token']))
+            $this->view('api');
+        else{
+            header("Location: http://localhost/ReDat");
+            exit();
+        }
     }
+
 }

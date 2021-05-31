@@ -1,6 +1,6 @@
 <div class="nav-box">
     <nav>
-        <h1 id="logo"> <a class="logo-a" href="../app/views/monitor.php">ReDAT </a></h1>
+        <h1 id="logo"> <a class="logo-a" href="<?php echo URLROOT; ?>/monitor">ReDAT </a></h1>
         <div class="menu-toggle" id="mobile-menu">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -12,9 +12,9 @@
                     <input type="search" placeholder="/r/Subreddit">
                 </form>
             </li>
-            <li><a href="../app/views/api.php" class="nav-links">API</a></li>
-            <li><a href="#" class="log-out">Log out</a></li>
+            <li><a href="<?php echo URLROOT; ?>/api" class="nav-links">API</a></li>
+            <li><a href="<?php echo URLROOT;?>/monitor/logout" class="log-out">Log out</a></li>
         </ul>
     </nav>
-    <script src = "../public/js/navbar.js"></script>
+    <script src = "js/navbar.js"></script>
 </div>
