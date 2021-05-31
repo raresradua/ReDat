@@ -19,7 +19,9 @@
             </div>
         </div>
         <div class="right-panel">
-            <button class="sign-in-btn" type="submit"> Sign In</button>
+            <form action=<?php data['authUrl'] ?> method="post">
+                <button class="sign-in-btn" type="submit"> Sign In</button>
+            </form>
             <section class="description">
                 <p><span class="small">You will be redirected to reddit.com for authentication.</span></p>
             </section>
@@ -29,7 +31,7 @@
 </main>
 
 <?php
-    include("../templates/footer.php");
+include("../templates/footer.php");
 ?>
 
 </body>

@@ -11,7 +11,7 @@
 <body class = "index-body">
 
 <?php
-include ("../templates/navbar.php");
+include("../templates/navbar.php");
 ?>
 <h1> API Documentation </h1>
 <h1> <u>NOTE: This is not final by any means </u></h1>
@@ -121,7 +121,7 @@ include ("../templates/navbar.php");
 </h1>
 
 <?php
-include ("../templates/footer.php");
+include("../templates/footer.php");
 ?>
 
 </body>
