@@ -4,4 +4,4 @@
   require_once 'libraries/Controller.php';
   require_once 'libraries/Request.php';
   require_once 'libraries/ApiRequests.php';
-  require_once 'libraries/Subreddit.php';
+  require_once 'libraries/Database.php';

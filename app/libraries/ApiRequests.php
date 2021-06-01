@@ -12,7 +12,7 @@ class ApiRequests
         $this->access_token = $access_token;
     }
 
-    public function getSubRel($where = "subscriber", $limit = 25, $after = null, $before = null)
+    public function getSubreddits($where = "subscriber", $limit = 25, $after = null, $before = null)
     {
         $qAfter = (!empty($after)) ? "&after=" . $after : "";
         $qBefore = (!empty($before)) ? "&before=" . $before : "";
@@ -34,4 +34,22 @@ class ApiRequests
         );
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTokenType()
+    {
+        return $this->token_type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccessToken()
+    {
+        return $this->access_token;
+    }
+
+
 }

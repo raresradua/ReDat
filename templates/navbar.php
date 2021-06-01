@@ -14,7 +14,7 @@
                     <datalist id="subreddits">
                         <?php
                         foreach($data['subreddits'] as $value)
-                            echo '<option value="'. $value->getDisplayNamePrefixed() .'">'
+                            echo '<option value="'. $value->subreddit .'">'
                         ?>
                     </datalist>
                 </form>

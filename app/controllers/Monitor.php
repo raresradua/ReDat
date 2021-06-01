@@ -1,72 +1,66 @@
 <?php
 
 class Monitor extends Controller {
-    private $subreddits;
     private $requests;
-    private $currsubreddit;
+    private $userModel;
+    private $userToken;
+
     public function __construct()
     {
         if(isset($_COOKIE['reddit_token'])){
             $token_info = explode(":", $_COOKIE['reddit_token']);
             $token_type = $token_info[0];
             $access_token = $token_info[1];
+            $this->userToken = $access_token;
 
             $this->requests = new ApiRequests($token_type, $access_token);
-            $this->subreddits = array();
+            $this->userModel = $this->model('User');
         }
     }
 
     public function index() {
         if(isset($_COOKIE['reddit_token'])) {
-
-            if (count($this->subreddits) == 0) {
-                $batch = $this->requests->getSubRel(limit:100);
-
+            if (!$this->userModel->userExists($this->userToken)) {
+                $this->userModel->addUser($this->userToken);
+                $batch = $this->requests->getSubreddits(limit: 100);
                 $childrenCount = $batch->data->dist;
                 $children = $batch->data->children;
 
                 for ($i = 0; $i < $childrenCount; $i++){
-                    $title = $children[$i]->data->title;
                     $display_name_prefixed = $children[$i]->data->display_name_prefixed;
-                    $subscribers = $children[$i]->data->subscribers;
-                    $subreddit = new Subreddit($title, $display_name_prefixed, $subscribers);
-                    array_push($this->subreddits, $subreddit);
+                    $this->userModel->addSubreddit($this->userToken, $display_name_prefixed);
                 }
-
-                $data = [
-                    "current_subreddit" => 'Choose a subreddit',
-                    "subreddits" => $this->subreddits
-                ];
-                $this->view('monitor', $data);
-                var_dump($this->subreddits);
             }
 
+            $subreddits = $this->userModel->getSubreddits($this->userToken);
+
+            $data = [
+                "current_subreddit" => 'Choose a subreddit',
+                "subreddits" => $subreddits
+            ];
+
+            $this->view('monitor', $data);
+
         } else{
-            header("Location: http://localhost/ReDat");
+            header("Location: " . URLROOT);
             exit();
         }
     }
 
-    public function r ($currsubreddit) {
-        $this->currsubreddit = $currsubreddit;
-        $batch = $this->requests->getSubRel(limit:100);
-
-        $childrenCount = $batch->data->dist;
-        $children = $batch->data->children;
-
-        for ($i = 0; $i < $childrenCount; $i++){
-            $title = $children[$i]->data->title;
-            $display_name_prefixed = $children[$i]->data->display_name_prefixed;
-            $subscribers = $children[$i]->data->subscribers;
-            $subreddit = new Subreddit($title, $display_name_prefixed, $subscribers);
-            array_push($this->subreddits, $subreddit);
+    public function r ($subreddit) {
+        if (isset($_COOKIE['reddit_token'])) {
+            if (!$this->userModel->userExists($this->userToken)) {
+                header("Location: " . URLROOT . "/monitor");
+                exit();
+            } else {
+                $data = [
+                    "current_subreddit" => $subreddit,
+                    "subreddits" => $this->userModel->getSubreddits($this->userToken),
+                    "posts" => $this->requests->getSubredditPosts($subreddit)
+                ];
+                $this->view('monitor', $data);
+            }
         }
-        $data = [
-            "current_subreddit" => $currsubreddit,
-            "subreddits" => $this->subreddits,
-            "posts" => $this->requests->getSubredditPosts($this->currsubreddit)
-        ];
-        $this->view('monitor', $data);
     }
 
     public function logout(){
