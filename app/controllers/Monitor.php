@@ -3,7 +3,7 @@
 class Monitor extends Controller {
     private $subreddits;
     private $requests;
-
+    private $currsubreddit;
     public function __construct()
     {
         if(isset($_COOKIE['reddit_token'])){
@@ -47,10 +47,24 @@ class Monitor extends Controller {
         }
     }
 
-    public function r ($subreddit) {
+    public function r ($currsubreddit) {
+        $this->currsubreddit = $currsubreddit;
+        $batch = $this->requests->getSubRel(limit:100);
+
+        $childrenCount = $batch->data->dist;
+        $children = $batch->data->children;
+
+        for ($i = 0; $i < $childrenCount; $i++){
+            $title = $children[$i]->data->title;
+            $display_name_prefixed = $children[$i]->data->display_name_prefixed;
+            $subscribers = $children[$i]->data->subscribers;
+            $subreddit = new Subreddit($title, $display_name_prefixed, $subscribers);
+            array_push($this->subreddits, $subreddit);
+        }
         $data = [
-            "current_subreddit" => $subreddit,
-            "subreddits" => $this->subreddits
+            "current_subreddit" => $currsubreddit,
+            "subreddits" => $this->subreddits,
+            "posts" => $this->requests->getSubredditPosts($this->currsubreddit)
         ];
         $this->view('monitor', $data);
     }

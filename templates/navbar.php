@@ -27,7 +27,7 @@
                                 var form = document.getElementById("searchForm");
                                 form.action = 'http://localhost/ReDat/monitor/' + val;
                                 form.submit();
-                                break;
+                                
                             }
                         }
                     }

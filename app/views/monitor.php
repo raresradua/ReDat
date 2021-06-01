@@ -26,7 +26,7 @@
                     Top Posts
                 </b>
                 &nbsp;
-                <select name="ChooseOption" id="topPosts">
+                <select name="ChooseOption" id="topPosts" >
                     <option value="today">Today</option>
                     <option value="week">This week</option>
                     <option value="month">This month</option>
@@ -44,42 +44,44 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        12.2k
-                    </td>
-                    <td>
-                        <a href="#">post</a>
-                    </td>
-                    <td>
-                        <a href="#">/u/Something</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        12.2k
-                    </td>
-                    <td>
-                        <a href="#">post</a>
-                    </td>
-                    <td>
-                        <a href="#">/u/Something</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        12.2k
-                    </td>
-                    <td>
-                        <a href="#">post</a>
-                    </td>
-                    <td>
-                        <a href="#">/u/Something</a>
-                    </td>
-                </tr>
+                <?php
+                    for($i = 0; $i < $data['posts']->data->dist; $i++){
+                        echo "<tr>";
+                            echo "<td>";
+                                echo $data['posts']->data->children[$i]->data->num_comments;
+                            echo "</td>";
+                            echo "<td>";
+                                echo "<a href= http://www.reddit.com/" . $data['posts']->data->children[$i]->data->permalink . " target=\"_blank\">" . $data['posts']->data->children[$i]->data->title . "</a>";
+                            echo "</td>";
+                            echo "<td>";
+                                echo "<a href= ". "\"http://www.reddit.com/user/". $data['posts']->data->children[$i]->data->author . "\" target=\"_blank\">"."u/".$data['posts']->data->children[$i]->data->author ."</a>";
+                            echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
+        <!-- <script>
+
+        async function updateTopPosts(timePeriod) {
+          let submissions = await fetch(`https://www.reddit.com/r/${location.pathname.split("/").pop()}/top.json?t=${timePeriod}`).then(r => r.json()).then(j => j.data.children.map(c => c.data));
+          if(submissions.length === 0 && timePeriod !== "today") {
+            topPosts.value = "today";
+            updateTopPosts("today");
+            return; 
+          }
+          document.querySelector(".top-posts .topPostsTable").innerHTML = `<table id=\"tableTopPosts\">                <thead>
+                <tr>
+                    <th>Comments</th>
+                    <th>Post</th>
+                    <th>Posted by</th>
+                </tr>
+                </thead><tbody>`+submissions.map((s,i) => `<tr><td>${s.score > 999 ? (s.score/1000).toFixed(1)+"k" : s.score}</td><td title="${s.title.replace(/"/g, '&#34;')}"><a href="${s.url}" target="_blank">${s.title}</a></td> <td><a href="https://www.reddit.com/u/${s.author}" target="_blank">/u/${s.author}</td></tr>`).join("")+`</tbody></table><div style="text-align:center;"><button onclick="[...document.querySelectorAll('.top-posts .topPostsTable tr')].forEach(el => el.style.display=''); this.parentNode.remove();">show more</button></div>`;
+        }
+        if(location.pathname.includes("/r/")) updateTopPosts(topPosts.value).catch(e => document.querySelector(".top-posts").style.display="none");
+        
+        </script> -->
         <h1> Statistics </h1>
         <div class="graphs">
             <div class="graphsOptions">
