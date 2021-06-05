@@ -27,10 +27,11 @@ class ApiRequests
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
 
-    public function getSubredditPosts($subreddit){
-        $urlSubRel = sprintf("%s/r/%s",
+    public function getSubredditPosts($subreddit, $time = "today"){
+        $urlSubRel = sprintf("%s/r/%s/top.json?t=%s",
         ENDPOINT_OAUTH,
-        $subreddit
+        $subreddit,
+        $time
         );
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
