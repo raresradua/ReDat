@@ -19,6 +19,32 @@
 
 <main>
     <section class="main-section">
+        <!-- <div id="tables">
+            <table id="tablestyle">
+                <tbody>
+                    <tr>
+                    <td><b>Title of subreddit: </b></td>
+                    <td><?php echo $data['about']->data->title?></td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Description: </b></td>
+                        <td><?php echo $data['about']->data->public_description?></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div> -->
+        <div id="subreddit">
+            <div>
+                <p><b>Title of subreddit:</b> <?php echo $data['about']->data->title?></p>
+                <p><b>Description:</b> <?php echo $data['about']->data->public_description?></p>
+            </div>
+            <div>
+                <p><b>Subscribers:</b> <?php echo $data['about']->data->subscribers?></p>
+                <p><b>Active users:</b> <?php echo $data['about']->data->active_user_count?></p>
+                <p><b>Total number of comments today: </b> <?php echo $data['number_of_comments']?></p>      
+            </div>
+        </div>
 
         <section class="top-posts">
             <div id="chooseTopPostsOption">
@@ -48,7 +74,7 @@
                     for($i = 0; $i < $data['posts']->data->dist; $i++){
                         echo "<tr>";
                             echo "<td>";
-                                echo $data['posts']->data->children[$i]->data->num_comments;
+                                echo $data['posts']->data->children[$i]->data->score;
                             echo "</td>";
                             echo "<td>";
                                 echo "<a href= http://www.reddit.com/" . $data['posts']->data->children[$i]->data->permalink . " target=\"_blank\">" . $data['posts']->data->children[$i]->data->title . "</a>";
@@ -81,7 +107,7 @@
                 </thead>
                 <tbody>`
                 + submissions.map((s,i) => `
-                <tr><td>${s.num_comments}</td> <td><a href="https://www.reddit.com${s.permalink}">${s.title}</a></td> <td><a href="https://www.reddit.com/u/${s.author}">/u/${s.author} </a></td></tr>`).join('') +`</tbody>` 
+                <tr><td>${s.score}</td> <td><a href="https://www.reddit.com${s.permalink}">${s.title}</a></td> <td><a href="https://www.reddit.com/u/${s.author}">/u/${s.author} </a></td></tr>`).join('') +`</tbody>` 
           ;
         }
         

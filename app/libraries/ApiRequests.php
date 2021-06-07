@@ -27,13 +27,48 @@ class ApiRequests
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
 
-    public function getSubredditPosts($subreddit, $time = "today"){
-        $urlSubRel = sprintf("%s/r/%s/top.json?t=%s",
+    public function getSubredditPosts($subreddit, $when = "top", $time = "today"){
+        $urlSubRel = sprintf("%s/r/%s/%s.json?t=%s",
         ENDPOINT_OAUTH,
         $subreddit,
+        $when,
         $time
         );
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+    }
+
+    public function getSubredditInfo($subreddit){
+        $urlSubRel = sprintf("%s/r/%s/about.json",
+        ENDPOINT_OAUTH,
+        $subreddit    
+        );
+        return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+    }
+
+    public function getNumberOfComments($subreddit){
+        $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=today",
+        ENDPOINT_OAUTH,
+        $subreddit
+        );
+
+        $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        $countComments = 0;
+        //1420063200 = 01 01 2015
+        while(!empty($data)){
+            $after = $data->data->after;
+            foreach($data->data->children as $child){
+                $countComments += $child->data->score;
+            }
+            $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=today&after=%s",
+            ENDPOINT_OAUTH,
+            $subreddit,
+            $after
+            );
+            if($after == null)
+                break;
+            $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token); 
+        }
+        return $countComments;
     }
 
     /**
@@ -51,6 +86,5 @@ class ApiRequests
     {
         return $this->access_token;
     }
-
 
 }
