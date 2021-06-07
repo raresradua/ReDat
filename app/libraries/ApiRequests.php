@@ -45,18 +45,23 @@ class ApiRequests
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
 
-    public function getNumberOfComments($subreddit){
+    public function getNumberOfUpvotesPostsComments($subreddit){
         $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=today",
         ENDPOINT_OAUTH,
         $subreddit
         );
 
         $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        $countUpvotes = 0;
+        $countPosts = 0;
         $countComments = 0;
+        
         while(!empty($data)){
             $after = $data->data->after;
             foreach($data->data->children as $child){
-                $countComments += $child->data->score;
+                $countUpvotes += $child->data->score;
+                $countComments += $child->data->num_comments;
+                $countPosts += 1;
             }
             $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=today&after=%s",
             ENDPOINT_OAUTH,
@@ -67,7 +72,18 @@ class ApiRequests
                 break;
             $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token); 
         }
-        return $countComments;
+        
+        $info = [
+            "upvotes" => $countUpvotes,
+            "comments" => $countComments,
+            "posts" => $countPosts
+        ];
+
+        return $info;
+    }
+
+    public function getNumberOfPosts($subreddit){
+        
     }
 
 }

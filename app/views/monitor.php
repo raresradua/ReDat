@@ -27,7 +27,18 @@
             <div>
                 <p><b>Subscribers:</b> <?php echo $data['about']->data->subscribers?></p>
                 <p><b>Active users:</b> <?php echo $data['about']->data->active_user_count?></p>
-                <p><b>Total number of upvotes today: </b> <?php echo $data['number_of_comments']?></p>
+            </div>
+            <div>
+                <p><b>Total number of upvotes today: </b> <?php echo $data['todayStatistics']['upvotes']?></p>
+                <p><b>Total number of comments today: </b> <?php echo $data['todayStatistics']['comments']?></p>
+                <p><b>Total number of posts today: </b> <?php echo $data['todayStatistics']['posts']?></p>
+            </div>
+        </div>
+
+        <div id="subreddit">
+            <div>
+                <p><b>Posts per Subscriber today: </b> <?php echo number_format(($data['todayStatistics']['posts'] / $data['about']->data->subscribers), 8) . "%";?></p>
+                <p><b>Comments per Subscriber today: </b><?php echo number_format(($data['todayStatistics']['comments'] / $data['about']->data->subscribers), 8) . "%";?></p>
             </div>
         </div>
 
@@ -50,6 +61,7 @@
                 <thead>
                 <tr>
                     <th>Upvotes</th>
+                    <th>Comments</th>
                     <th>Post</th>
                     <th>Posted by</th>
                 </tr>
@@ -60,6 +72,9 @@
                         echo "<tr>";
                             echo "<td>";
                                 echo $data['posts']->data->children[$i]->data->score;
+                            echo "</td>";
+                            echo "<td>";
+                                echo $data['posts']->data->children[$i]->data->num_comments;
                             echo "</td>";
                             echo "<td>";
                                 echo "<a href= http://www.reddit.com/" . $data['posts']->data->children[$i]->data->permalink . " target=\"_blank\">" . $data['posts']->data->children[$i]->data->title . "</a>";
@@ -85,6 +100,7 @@
           document.querySelector("#tableTopPosts").innerHTML = `
                 <thead>
                 <tr>
+                    <th>Upvotes</th>
                     <th>Comments</th>
                     <th>Post</th>
                     <th>Posted by</th>
@@ -92,7 +108,7 @@
                 </thead>
                 <tbody>`
                 + submissions.map((s,i) => `
-                <tr><td>${s.score}</td> <td><a href="https://www.reddit.com${s.permalink}">${s.title}</a></td> <td><a href="https://www.reddit.com/u/${s.author}">/u/${s.author} </a></td></tr>`).join('') +`</tbody>` 
+                <tr><td>${s.score}</td><td>${s.num_comments}</td> <td><a href="https://www.reddit.com${s.permalink}">${s.title}</a></td> <td><a href="https://www.reddit.com/u/${s.author}">/u/${s.author} </a></td></tr>`).join('') +`</tbody>` 
           ;
         }
         

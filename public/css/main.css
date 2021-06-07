@@ -248,12 +248,16 @@ input[type=search]:hover {
     text-align: left;
 }
 
-#tableTopPosts>thead>tr>th:nth-child(3) {
-    width: 20%;
+#tableTopPosts>thead>tr>th:nth-child(4) {
+    width: 10%;
+}
+
+#tableTopPosts>thead>tr>th:nth-child(2) {
+    width: 5%;
 }
 
 #tableTopPosts>thead>tr>th:nth-child(1) {
-    width: 10%;
+    width: 5%;
 }
 
 #subreddit {
