@@ -118,15 +118,27 @@
 
            <div id="comments"></div>
            <script>
-                    var x_set = <?php echo json_encode($data['dataset']['x']);?>;
-                    var y_set = <?php echo json_encode($data['dataset']['y']);?>;
+               var x_set = <?php echo json_encode($data['dataset']['x']);?>; 
+               var y_set = <?php echo json_encode($data['dataset']['y']);?>;
+               var data =[
+                {
+                    x: x_set,
+                    y: y_set,
+                    type: 'bar'
+                }
+               ];
+               Plotly.newPlot('comments', data);
+           </script>
+           <!-- <script>
+                    var x_set = <?php //echo json_encode($data['dataset']['x']);?>;
+                    var y_set = <?php //echo json_encode($data['dataset']['y']);?>;
 	                TESTER = document.getElementById('comments');
 	                Plotly.newPlot( TESTER, [{
 	                x: x_set,
 	                y: y_set}], {
 	                margin: { t: 0 } } );
                     Plotly.BUILD;
-            </script>
+            </script> -->
 
 
             <div class="graphsFilters">
