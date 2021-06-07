@@ -38,7 +38,7 @@
             </div>
             <div>
                 <p><b>Posts per Subscriber today: </b> <?php echo number_format(($data['about']->data->subscribers != null ? ($data['todayStatistics']['posts'] / $data['about']->data->subscribers):0), 8) . "%";?></p>
-                <p><b>Comments per Subscriber today: </b><?php echo number_format(($data['todayStatistics']['comments'] / $data['about']->data->subscribers), 8) . "%";?></p>
+                <p><b>Comments per Subscriber today: </b><?php echo number_format(($data['about']->data->subscribers != null ? ($data['todayStatistics']['comments'] / $data['about']->data->subscribers) : 0), 8) . "%";?></p>
             </div>
         </div>
 
