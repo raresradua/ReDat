@@ -34,22 +34,4 @@ class ApiRequests
         );
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
-
-    /**
-     * @return mixed
-     */
-    public function getTokenType()
-    {
-        return $this->token_type;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAccessToken()
-    {
-        return $this->access_token;
-    }
-
-
 }

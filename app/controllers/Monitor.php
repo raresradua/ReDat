@@ -22,6 +22,7 @@ class Monitor extends Controller {
         if(isset($_COOKIE['reddit_token'])) {
             if (!$this->userModel->userExists($this->userToken)) {
                 $this->userModel->addUser($this->userToken);
+                // TODO: de repetat asta daca user-ul are mai mult de 100 de subreddit-uri
                 $batch = $this->requests->getSubreddits(limit: 100);
                 $childrenCount = $batch->data->dist;
                 $children = $batch->data->children;
@@ -32,11 +33,9 @@ class Monitor extends Controller {
                 }
             }
 
-            $subreddits = $this->userModel->getSubreddits($this->userToken);
-
             $data = [
                 "current_subreddit" => 'Choose a subreddit',
-                "subreddits" => $subreddits
+                "subreddits" => $this->userModel->getSubreddits($this->userToken)
             ];
 
             $this->view('monitor', $data);
