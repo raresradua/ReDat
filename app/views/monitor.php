@@ -17,7 +17,15 @@
     include("../templates/navbar.php");
 ?>
 
-<main>
+<main id="display">
+    <script>
+        if(window.location.pathname == "/monitor"){
+            document.getElementsById("main").style.display = "none";
+        }
+        else{
+            document.getElementsById("main").style.display = "";
+        }
+    </script>
     <section class="main-section">
         <div id="subreddit">
             <div>

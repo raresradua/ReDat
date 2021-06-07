@@ -1,4 +1,4 @@
-<footer>
+<footer id="display">
     <div class = "footer-title">
         <a href="<?php echo URLROOT; ?>/monitor" style="text-decoration:none;">
             <p class = footer-title-p>
