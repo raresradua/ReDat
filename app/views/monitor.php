@@ -20,10 +20,10 @@
 <main id="display">
     <script>
         if(window.location.pathname == "/monitor"){
-            document.getElementsById("display").style.display = "none";
+            document.getElementById("display").style.display = "none";
         }
         else{
-            document.getElementsById("display").style.display = "";
+            document.getElementById("display").style.display = "";
         }
     </script>
     <section class="main-section">
