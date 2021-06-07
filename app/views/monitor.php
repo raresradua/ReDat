@@ -114,10 +114,6 @@
         
         </script>
         <h1> Statistics </h1>
-        <?php
-            var_dump($data['dataset']['x']);
-            var_dump($data['dataset']['y']);
-        ?>
         <div class="graphs">
 
            <div id="comments"></div>

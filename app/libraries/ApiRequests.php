@@ -86,7 +86,7 @@ class ApiRequests
         $numberOfComments = array();
         $days = array();
 
-        $urlSubRel = sprintf("%s/r/%s/new.json?t=month",
+        $urlSubRel = sprintf("%s/r/%s/top.json?t=month",
         ENDPOINT_OAUTH,
         $subreddit,
         );
@@ -104,7 +104,7 @@ class ApiRequests
             if($after == null)
                 break;
 
-            $urlSubRel = sprintf("%s/r/%s/new.json?t=month&after=%s",
+            $urlSubRel = sprintf("%s/r/%s/top.json?t=month&after=%s",
             ENDPOINT_OAUTH,
             $subreddit,
             $after
