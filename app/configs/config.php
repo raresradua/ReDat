@@ -16,7 +16,7 @@ define('BASE64_APP_CREDENTIALS', 'ZlQ2Sy1zTlBBTWtSYkE6Z1paTUtfSUZEWWhkcjkzRlBBbD
 define('SCOPES', 'creddits,modcontributors,modconfig,subscribe,wikiread,wikiedit,vote,mysubreddits,submit,modlog,modposts,modflair,save,modothers,read,privatemessages,report,identity,livemanage,account,modtraffic,edit,modwiki,modself,history,flair');
 
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '123456');
-define('DB_NAME', 'users');
+define('DB_HOST', 'eu-cdbr-west-01.cleardb.com');
+define('DB_USER', 'bffb819ebb98e6');
+define('DB_PASS', '08579768');
+define('DB_NAME', 'heroku_cd694403bb0e88e');
