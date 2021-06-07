@@ -99,7 +99,7 @@ class ApiRequests
                 array_push($numberOfComments, $child->data->num_comments);
                 $epoch = $child->data->created_utc;
                 $dt = new DateTime("@$epoch");
-                array_push($days, $dt->format('Y-m-d H:i:s'));
+                array_push($days, $dt->format('Y-m-d'));
             }
             if($after == null)
                 break;
