@@ -186,41 +186,23 @@
 
         <section id="list-tables">
             <div id="tables">
-                <h2>1st table</h2>
+                <h2>Moderators</h2>
                 <table id="tablestyle">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Subreddit</th>
-                        <th>Growth %</th>
+                        <th>Name</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>memes</td>
-                        <td>23%</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>cats</td>
-                        <td>10%</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>cats</td>
-                        <td>10%</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>oops</td>
-                        <td>20%</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>dogs</td>
-                        <td>10%</td>
-                    </tr>
+                    <?php
+                        foreach ($data["moderators"]->data->children as $value) {
+                            echo "<tr>";
+                            echo "<td>";
+                            echo $value->name;
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -293,8 +275,6 @@
                 </table>
             </div>
         </section>
-
-
 
     </section>
 
