@@ -121,4 +121,12 @@ class ApiRequests
         return $info;
     }
 
+    public function getModerators($subreddit) {
+        $url = sprintf("%s/r/%s/about/moderators.json",
+            ENDPOINT_OAUTH,
+            $subreddit
+        );
+
+        return Request::runCurl($url, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+    }
 }

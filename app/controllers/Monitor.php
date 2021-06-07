@@ -59,7 +59,8 @@ class Monitor extends Controller {
                     "posts" => $this->requests->getSubredditPosts($subreddit),
                     "about" => $this->requests->getSubredditInfo($subreddit),
                     "todayStatistics" => $this->requests->getNumberOfUpvotesPostsComments($subreddit),
-                    "dataset" => $this->requests->getNumberOfCommentsAndDays($subreddit) 
+                    "dataset" => $this->requests->getNumberOfCommentsAndDays($subreddit),
+                    "moderators" => $this->requests->getModerators($subreddit)
                 ];
                 $this->view('monitor', $data);
             }
