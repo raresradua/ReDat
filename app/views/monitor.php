@@ -19,21 +19,6 @@
 
 <main>
     <section class="main-section">
-        <!-- <div id="tables">
-            <table id="tablestyle">
-                <tbody>
-                    <tr>
-                    <td><b>Title of subreddit: </b></td>
-                    <td><?php echo $data['about']->data->title?></td>
-                    </tr>
-
-                    <tr>
-                        <td><b>Description: </b></td>
-                        <td><?php echo $data['about']->data->public_description?></td>
-                    </tr>
-                </tbody>
-            </table>
-    </div> -->
         <div id="subreddit">
             <div>
                 <p><b>Title of subreddit:</b> <?php echo $data['about']->data->title?></p>
