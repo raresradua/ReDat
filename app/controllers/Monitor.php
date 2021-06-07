@@ -52,10 +52,13 @@ class Monitor extends Controller {
                 header("Location: " . URLROOT . "/monitor");
                 exit();
             } else {
+
                 $data = [
                     "current_subreddit" => $subreddit,
                     "subreddits" => $this->userModel->getSubreddits($this->userToken),
-                    "posts" => $this->requests->getSubredditPosts($subreddit)
+                    "posts" => $this->requests->getSubredditPosts($subreddit),
+                    "about" => $this->requests->getSubredditInfo($subreddit),
+                    "number_of_comments" => $this->requests->getNumberOfComments($subreddit) 
                 ];
                 $this->view('monitor', $data);
             }

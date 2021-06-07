@@ -19,14 +19,40 @@
 
 <main>
     <section class="main-section">
+        <!-- <div id="tables">
+            <table id="tablestyle">
+                <tbody>
+                    <tr>
+                    <td><b>Title of subreddit: </b></td>
+                    <td><?php echo $data['about']->data->title?></td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Description: </b></td>
+                        <td><?php echo $data['about']->data->public_description?></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div> -->
+        <div id="subreddit">
+            <div>
+                <p><b>Title of subreddit:</b> <?php echo $data['about']->data->title?></p>
+                <p><b>Description:</b> <?php echo $data['about']->data->public_description?></p>
+            </div>
+            <div>
+                <p><b>Subscribers:</b> <?php echo $data['about']->data->subscribers?></p>
+                <p><b>Active users:</b> <?php echo $data['about']->data->active_user_count?></p>
+                <p><b>Total number of comments today: </b> <?php echo $data['number_of_comments']?></p>      
+            </div>
+        </div>
 
         <section class="top-posts">
             <div id="chooseTopPostsOption">
                 <b>
                     Top Posts
                 </b>
-                &nbsp
-                <select name="ChooseOption" id="topPosts" >
+                &nbsp;
+                <select name="ChooseOption" id="topPosts" onchange = updateTopPosts(this.value)>
                     <option value="today">Today</option>
                     <option value="week">This week</option>
                     <option value="month">This month</option>
@@ -38,7 +64,7 @@
             <table id="tableTopPosts">
                 <thead>
                 <tr>
-                    <th>Comments</th>
+                    <th>Upvotes</th>
                     <th>Post</th>
                     <th>Posted by</th>
                 </tr>
@@ -48,7 +74,7 @@
                     for($i = 0; $i < $data['posts']->data->dist; $i++){
                         echo "<tr>";
                             echo "<td>";
-                                echo $data['posts']->data->children[$i]->data->num_comments;
+                                echo $data['posts']->data->children[$i]->data->score;
                             echo "</td>";
                             echo "<td>";
                                 echo "<a href= http://www.reddit.com/" . $data['posts']->data->children[$i]->data->permalink . " target=\"_blank\">" . $data['posts']->data->children[$i]->data->title . "</a>";
@@ -62,26 +88,30 @@
                 </tbody>
             </table>
         </div>
-        <!-- <script>
+        <script>
 
         async function updateTopPosts(timePeriod) {
           let submissions = await fetch(`https://www.reddit.com/r/${location.pathname.split("/").pop()}/top.json?t=${timePeriod}`).then(r => r.json()).then(j => j.data.children.map(c => c.data));
-          if(submissions.length === 0 && timePeriod !== "today") {
-            topPosts.value = "today";
-            updateTopPosts("today");
+          if(submissions.length === 0 && timePeriod !== "year") {
+            topPosts.value = "year";
+            updateTopPosts("year");
             return; 
           }
-          document.querySelector(".top-posts .topPostsTable").innerHTML = `<table id=\"tableTopPosts\">                <thead>
+          document.querySelector("#tableTopPosts").innerHTML = `
+                <thead>
                 <tr>
                     <th>Comments</th>
                     <th>Post</th>
                     <th>Posted by</th>
                 </tr>
-                </thead><tbody>`+submissions.map((s,i) => `<tr><td>${s.score > 999 ? (s.score/1000).toFixed(1)+"k" : s.score}</td><td title="${s.title.replace(/"/g, '&#34;')}"><a href="${s.url}" target="_blank">${s.title}</a></td> <td><a href="https://www.reddit.com/u/${s.author}" target="_blank">/u/${s.author}</td></tr>`).join("")+`</tbody></table><div style="text-align:center;"><button onclick="[...document.querySelectorAll('.top-posts .topPostsTable tr')].forEach(el => el.style.display=''); this.parentNode.remove();">show more</button></div>`;
+                </thead>
+                <tbody>`
+                + submissions.map((s,i) => `
+                <tr><td>${s.score}</td> <td><a href="https://www.reddit.com${s.permalink}">${s.title}</a></td> <td><a href="https://www.reddit.com/u/${s.author}">/u/${s.author} </a></td></tr>`).join('') +`</tbody>` 
+          ;
         }
-        if(location.pathname.includes("/r/")) updateTopPosts(topPosts.value).catch(e => document.querySelector(".top-posts").style.display="none");
         
-        </script> -->
+        </script>
         <h1> Statistics </h1>
         <div class="graphs">
             <div class="graphsOptions">
