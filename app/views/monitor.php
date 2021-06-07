@@ -127,7 +127,11 @@
                     type: 'bar'
                 }
                ];
-               Plotly.newPlot('comments', data);
+               var layout = {
+                    paper_bgcolor : 'rgba(0, 0, 0, 0)',
+                    plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
+               };
+               Plotly.newPlot('comments', data, layout);
            </script>
            <!-- <script>
                     var x_set = <?php //echo json_encode($data['dataset']['x']);?>;
