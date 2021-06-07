@@ -82,8 +82,43 @@ class ApiRequests
         return $info;
     }
 
-    public function getNumberOfPosts($subreddit){
-        
+    public function getNumberOfCommentsAndDays($subreddit){
+        $numberOfComments = array();
+        $days = array();
+
+        $urlSubRel = sprintf("%s/r/%s/new.json?limit=100&t=month",
+        ENDPOINT_OAUTH,
+        $subreddit,
+        );
+
+        $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+
+        while(!empty($data)){
+            $after = $data->data->after;
+            foreach($data->data->children as $child){
+                array_push($numberOfComments, $child->data->num_comments);
+                $epoch = $child->data->created_utc;
+                $dt = new DateTime("@$epoch");
+                array_push($days, $dt->format('Y-m-d'));
+            }
+            if($after == null)
+                break;
+
+            $urlSubRel = sprintf("%s/r/%s/new.json?limit=100&t=month&after=%s",
+            ENDPOINT_OAUTH,
+            $subreddit,
+            $after
+            );
+
+            $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        }
+
+        $info = [
+            "x" => $days,
+            "y" => $numberOfComments
+        ];
+
+        return $info;
     }
 
 }
