@@ -115,8 +115,10 @@
         </script>
         <h1> Statistics </h1>
         <div class="graphs">
-
+        <div class="statistics">
            <div id="comments"></div>
+           <div id="posts"></div>
+        </div>    
            <script>
                var x_set = <?php echo json_encode($data['dataset']['x']);?>; 
                var y_set = <?php echo json_encode($data['dataset']['y']);?>;
@@ -128,6 +130,7 @@
                 }
                ];
                var layout = {
+                    title : 'Number of comments per Top Post in a day',
                     paper_bgcolor : 'rgba(0, 0, 0, 0)',
                     plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
                };
