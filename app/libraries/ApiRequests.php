@@ -121,6 +121,50 @@ class ApiRequests
         return $info;
     }
 
+    public function getPostPerDayInAMonth($subreddit){
+        $numberOfPosts = array();
+        $days = array();
+
+        $urlSubRel = sprintf("%s/r/%s/new.json?limit=100",
+        ENDPOINT_OAUTH,
+        $subreddit
+        );
+
+        $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        $timeOneMonthAgo = time() - 2678400; //2678400 one month in unix epoch time between two months, current date and one month ago
+        while(!empty($data)){
+            $after = $data->data->after;
+            $ok = 0;
+            foreach($data->data->children as $child){
+                if($child->data->created_utc < $timeOneMonthAgo){
+                    $ok = 1;
+                    break;
+                }
+                $epoch = $child->data->created_utc;
+                $dt = new DateTime("@$epoch");
+                array_push($days, $dt->format('Y-m-d'));
+                array_push($numberOfPosts, 1);
+            }
+            if($after == null || $ok == 1)
+                break;
+
+            $urlSubRel = sprintf("%s/r/%s/new.json?limit=100&after=%s",
+            ENDPOINT_OAUTH,
+            $subreddit,
+            $after
+            );
+
+            $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        }
+
+        $info = [
+            "x" => $days,
+            "y" => $numberOfPosts
+        ];
+
+        return $info;
+    }
+
     public function getModerators($subreddit) {
         $url = sprintf("%s/r/%s/about/moderators.json",
             ENDPOINT_OAUTH,

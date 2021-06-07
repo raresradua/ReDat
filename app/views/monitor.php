@@ -18,14 +18,6 @@
 ?>
 
 <main id="display">
-    <script>
-        if(window.location.pathname == "/monitor"){
-            document.getElementById("display").style.display = "none";
-        }
-        else{
-            document.getElementById("display").style.display = "";
-        }
-    </script>
     <section class="main-section">
         <div id="subreddit">
             <div>
@@ -144,6 +136,25 @@
                };
                Plotly.newPlot('comments', data, layout);
            </script>
+
+           <script>
+                var x_set = <?php echo json_encode($data['datasetPostsDayMonth']['x']);?>;
+                var y_set = <?php echo json_encode($data['datasetPostsDayMonth']['y']);?>;
+
+                var data =[
+                    {
+                        x: x_set,
+                        y: y_set,
+                        type: 'scatter'
+                    }
+                ];
+                var layout = {
+                    title : 'Posts per day in a month',
+                    paper_bgcolor : 'rgba(0, 0, 0, 0)',
+                    plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
+                };
+                Plotly.newPlot('posts', data, layout);
+           </script>
            <!-- <script>
                     var x_set = <?php //echo json_encode($data['dataset']['x']);?>;
                     var y_set = <?php //echo json_encode($data['dataset']['y']);?>;
@@ -219,7 +230,7 @@
                         foreach ($data["moderators"]->data->children as $value) {
                             echo "<tr>";
                             echo "<td>";
-                            $val = "<a href='http://reddit.com/u/" . $value->name . "'>" . $value->name . "</a>";
+                            $val = "<a href='http://reddit.com/u/" . $value->name . "'>" . "u/".$value->name . "</a>";
                             echo $val;
                             echo "</td>";
                             echo "</tr>";
@@ -305,6 +316,13 @@
 <?php
     include("../templates/footer.php");
 ?>
-
+    <script>
+        if(window.location.pathname == "/monitor"){
+            document.getElementById("display").style.display = "none";
+        }
+        else{
+            document.getElementById("display").style.display = "";
+        }
+    </script>
 </body>
 </html>
