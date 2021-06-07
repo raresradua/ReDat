@@ -42,7 +42,7 @@
             <div>
                 <p><b>Subscribers:</b> <?php echo $data['about']->data->subscribers?></p>
                 <p><b>Active users:</b> <?php echo $data['about']->data->active_user_count?></p>
-                <p><b>Total number of comments today: </b> <?php echo $data['number_of_comments']?></p>      
+                <p><b>Total number of upvotes today: </b> <?php echo $data['number_of_comments']?></p>
             </div>
         </div>
 
