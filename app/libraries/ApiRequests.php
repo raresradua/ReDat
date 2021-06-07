@@ -86,7 +86,7 @@ class ApiRequests
         $numberOfComments = array();
         $days = array();
 
-        $urlSubRel = sprintf("%s/r/%s/new.json?limit=100&t=month",
+        $urlSubRel = sprintf("%s/r/%s/new.json?t=month",
         ENDPOINT_OAUTH,
         $subreddit,
         );
@@ -99,12 +99,12 @@ class ApiRequests
                 array_push($numberOfComments, $child->data->num_comments);
                 $epoch = $child->data->created_utc;
                 $dt = new DateTime("@$epoch");
-                array_push($days, $dt->format('Y-m-d'));
+                array_push($days, $dt->format('Y-m-d H:i:s'));
             }
             if($after == null)
                 break;
 
-            $urlSubRel = sprintf("%s/r/%s/new.json?limit=100&t=month&after=%s",
+            $urlSubRel = sprintf("%s/r/%s/new.json?t=month&after=%s",
             ENDPOINT_OAUTH,
             $subreddit,
             $after
