@@ -7,7 +7,7 @@ class SignIn extends Controller {
 
     public function index() {
         if (isset($_COOKIE['reddit_token'])) {
-            header("Location: http://localhost/ReDat/monitor");
+            header("Location: " . URLROOT . "/monitor");
             exit();
         } else {
             if (isset($_GET['code'])) {
@@ -25,7 +25,7 @@ class SignIn extends Controller {
                     $cookie_time = 60 * 59 + time();
                     setcookie('reddit_token', "{$token_type}:{$access_token}", $cookie_time);
 
-                    header("Location: http://localhost/ReDat/monitor");
+                    header("Location: " . URLROOT . "/monitor");
                     exit();
                 }
             } else {

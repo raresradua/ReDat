@@ -1,7 +1,7 @@
 <?php
 
 define('APPROOT', dirname(dirname(__FILE__)));
-define('URLROOT', 'http://localhost/ReDat');
+define('URLROOT', 'https://re-dat.herokuapp.com');
 define('SITENAME', 'ReDat');
 
 

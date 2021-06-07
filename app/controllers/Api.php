@@ -25,7 +25,7 @@ class Api extends Controller {
             $this->view('api', $data);
         }
         else{
-            header("Location: http://localhost/ReDat");
+            header("Location: " . URLROOT);
             exit();
         }
     }

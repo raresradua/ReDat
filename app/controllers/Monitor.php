@@ -70,7 +70,7 @@ class Monitor extends Controller {
             unset($_COOKIE['reddit_token']);
             var_dump($_COOKIE);
             setcookie('reddit_token', null, -1, '/ReDat');
-            header("Location: http://localhost/ReDat/");
+            header("Location: " . URLROOT);
             exit();
         }
     }
