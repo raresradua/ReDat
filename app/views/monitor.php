@@ -204,7 +204,8 @@
                         foreach ($data["moderators"]->data->children as $value) {
                             echo "<tr>";
                             echo "<td>";
-                            echo $value->name;
+                            $val = "<a href='http://reddit.com/u/" . $value->name . "'>" . $value->name . "</a>";
+                            echo $val;
                             echo "</td>";
                             echo "</tr>";
                         }
