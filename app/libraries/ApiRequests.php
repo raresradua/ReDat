@@ -142,8 +142,14 @@ class ApiRequests
                 }
                 $epoch = $child->data->created_utc;
                 $dt = new DateTime("@$epoch");
-                array_push($days, $dt->format('Y-m-d'));
-                array_push($numberOfPosts, 1);
+                if(in_array($dt->format('Y-m-d'), $days)){
+                    $index = array_search($dt->format('Y-m-d'), $days);
+                    $numberOfPosts[$index]+=1;
+                }
+                else{
+                    array_push($days, $dt->format('Y-m-d'));
+                    array_push($numberOfPosts, 1);
+                }
             }
             if($after == null || $ok == 1)
                 break;

@@ -316,13 +316,13 @@
 <?php
     include("../templates/footer.php");
 ?>
+</body>    
     <script>
-        if(window.location.pathname == "/monitor"){
+        if(window.location.pathname == "/monitor" || window.location.pathname == "/monitor/"){
             document.getElementById("display").style.display = "none";
         }
         else{
             document.getElementById("display").style.display = "";
         }
     </script>
-</body>
 </html>
