@@ -318,11 +318,15 @@
 ?>
 </body>    
     <script>
-        if(window.location.pathname == "/monitor" || window.location.pathname == "/monitor/"){
+        // /monitor and /monitor/ for heroku
+        if(window.location.pathname == "/ReDat/monitor" || window.location.pathname == "/monitor/"){
             document.getElementById("display").style.display = "none";
+            document.querySelector('footer').style = 'display: none;';
+            document.getElement
         }
         else{
             document.getElementById("display").style.display = "";
+            document.querySelector('footer').style = 'display: "";';
         }
     </script>
 </html>
