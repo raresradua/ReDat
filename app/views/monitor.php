@@ -17,7 +17,8 @@
     include("../templates/navbar.php");
 ?>
 
-<main id="display">
+<main>
+    <script src="js/display.js"></script>
     <section class="main-section">
         <div id="subreddit">
             <div>
@@ -134,7 +135,18 @@
                     paper_bgcolor : 'rgba(0, 0, 0, 0)',
                     plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
                };
-               Plotly.newPlot('comments', data, layout);
+
+               var buttons = {
+                    modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+                    modeBarButtonsToAdd:[{
+                        name: 'Download SVG format',
+                        icon: Plotly.Icons.camera,
+                        click: function(gd){
+                            Plotly.downloadImage(gd, {format: 'svg'})
+                    }
+                    }]
+                };
+               Plotly.newPlot('comments', data, layout, buttons);
            </script>
 
            <script>
@@ -153,20 +165,19 @@
                     paper_bgcolor : 'rgba(0, 0, 0, 0)',
                     plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
                 };
-                Plotly.newPlot('posts', data, layout);
+
+                var buttons = {
+                    modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+                    modeBarButtonsToAdd:[{
+                        name: 'Download SVG format',
+                        icon: Plotly.Icons.camera,
+                        click: function(gd){
+                            Plotly.downloadImage(gd, {format: 'svg'})
+                    }
+                    }]
+                };
+                Plotly.newPlot('posts', data, layout, buttons);
            </script>
-           <!-- <script>
-                    var x_set = <?php //echo json_encode($data['dataset']['x']);?>;
-                    var y_set = <?php //echo json_encode($data['dataset']['y']);?>;
-	                TESTER = document.getElementById('comments');
-	                Plotly.newPlot( TESTER, [{
-	                x: x_set,
-	                y: y_set}], {
-	                margin: { t: 0 } } );
-                    Plotly.BUILD;
-            </script> -->
-
-
             <div class="graphsFilters">
                 <div class="downloadAs">
                     Download as: <span><button class="chooseBtn">SVG</button></span> / <span><button class="chooseBtn">CSV</button></span> <span><button class="dwnldBtn"><span class="material-icons">file_download</span></button></span>
@@ -316,17 +327,7 @@
 <?php
     include("../templates/footer.php");
 ?>
+<script src="js/display-footer.js"></script>
+
 </body>    
-    <script>
-        // /monitor and /monitor/ for heroku
-        if(window.location.pathname == "/ReDat/monitor" || window.location.pathname == "/monitor/"){
-            document.getElementById("display").style.display = "none";
-            document.querySelector('footer').style = 'display: none;';
-            document.getElement
-        }
-        else{
-            document.getElementById("display").style.display = "";
-            document.querySelector('footer').style = 'display: "";';
-        }
-    </script>
 </html>

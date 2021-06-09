@@ -78,6 +78,7 @@ h1 {
     margin-left: 2.85%;
     top: 20px;
     width: 97%;
+    z-index: 1;
 }
 
 nav {
