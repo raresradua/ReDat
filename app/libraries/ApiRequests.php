@@ -148,110 +148,6 @@ class ApiRequests
         return array_slice($values, 0, 10, true);
     }
 
-    public function processDataset($posts){
-        $data = array();
-        foreach($posts as $post){
-            $epoch = $post->created_utc;
-            $dt = new DateTime("@$epoch");
-            $dt = $dt->format('Y-m-d');
-            if (array_key_exists($dt, $data)){
-                $data[$dt] += 1;
-            } else {
-                $data[$dt] = 0;
-            }
-        }
-        return $data;
-    }
-
-    public function getNumberOfCommentsAndDays($subreddit){
-        $numberOfComments = array();
-        $days = array();
-
-        $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=month",
-        ENDPOINT_OAUTH,
-        $subreddit,
-        );
-
-        $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
-
-        while(!empty($data)){
-            $after = $data->data->after;
-            foreach($data->data->children as $child){
-                array_push($numberOfComments, $child->data->num_comments);
-                $epoch = $child->data->created_utc;
-                $dt = new DateTime("@$epoch");
-                array_push($days, $dt->format('Y-m-d'));
-            }
-            if($after == null)
-                break;
-
-            $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=month&after=%s",
-            ENDPOINT_OAUTH,
-            $subreddit,
-            $after
-            );
-
-            $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
-        }
-
-        $info = [
-            "x" => $days,
-            "y" => $numberOfComments
-        ];
-
-        return $info;
-    }
-
-    public function getPostPerDayInAMonth($subreddit){
-        $numberOfPosts = array();
-        $days = array();
-
-        $urlSubRel = sprintf("%s/r/%s/new.json?limit=100",
-        ENDPOINT_OAUTH,
-        $subreddit
-        );
-
-        $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
-        $timeOneMonthAgo = time() - 2678400; //2678400 one month in unix epoch time between two months, current date and one month ago
-        while(!empty($data)){
-            $after = $data->data->after;
-            $ok = 0;
-            foreach($data->data->children as $child){
-                if($child->data->created_utc < $timeOneMonthAgo){
-                    $ok = 1;
-                    break;
-                }
-                $epoch = $child->data->created_utc;
-                $dt = new DateTime("@$epoch");
-                if(in_array($dt->format('Y-m-d'), $days)){
-                    $index = array_search($dt->format('Y-m-d'), $days);
-                    $numberOfPosts[$index]+=1;
-                }
-                else{
-                    array_push($days, $dt->format('Y-m-d'));
-                    array_push($numberOfPosts, 1);
-                }
-            }
-            if($after == null || $ok == 1)
-                break;
-
-            $urlSubRel = sprintf("%s/r/%s/new.json?limit=100&after=%s",
-            ENDPOINT_OAUTH,
-            $subreddit,
-            $after
-            );
-
-            $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
-        }
-
-        $info = [
-            "x" => $days,
-            "y" => $numberOfPosts
-        ];
-
-        return $info;
-    }
-
     public function getModerators($subreddit) {
         $url = sprintf("%s/r/%s/about/moderators.json",
             ENDPOINT_OAUTH,
@@ -280,4 +176,94 @@ class ApiRequests
 
         return Request::runCurl($url);
     }
+
+    public function getNumberOfCommentsAndDays($subreddit){
+        $numberOfComments = array();
+        $days = array();
+
+        $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=month",
+            ENDPOINT_OAUTH,
+            $subreddit,
+        );
+
+        $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+
+        while(!empty($data)){
+            $after = $data->data->after;
+            foreach($data->data->children as $child){
+                array_push($numberOfComments, $child->data->num_comments);
+                $epoch = $child->data->created_utc;
+                $dt = new DateTime("@$epoch");
+                array_push($days, $dt->format('Y-m-d'));
+            }
+            if($after == null)
+                break;
+
+            $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=month&after=%s",
+                ENDPOINT_OAUTH,
+                $subreddit,
+                $after
+            );
+
+            $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        }
+
+        $info = [
+            "x" => $days,
+            "y" => $numberOfComments
+        ];
+
+        return $info;
+    }
+
+    public function getPostPerDayInAMonth($subreddit){
+        $numberOfPosts = array();
+        $days = array();
+
+        $urlSubRel = sprintf("%s/r/%s/new.json?limit=100",
+            ENDPOINT_OAUTH,
+            $subreddit
+        );
+
+        $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        $timeOneMonthAgo = time() - 2678400; //2678400 one month in unix epoch time between two months, current date and one month ago
+        while(!empty($data)){
+            $after = $data->data->after;
+            $ok = 0;
+            foreach($data->data->children as $child){
+                if($child->data->created_utc < $timeOneMonthAgo){
+                    $ok = 1;
+                    break;
+                }
+                $epoch = $child->data->created_utc;
+                $dt = new DateTime("@$epoch");
+                if(in_array($dt->format('Y-m-d'), $days)){
+                    $index = array_search($dt->format('Y-m-d'), $days);
+                    $numberOfPosts[$index]+=1;
+                }
+                else{
+                    array_push($days, $dt->format('Y-m-d'));
+                    array_push($numberOfPosts, 1);
+                }
+            }
+            if($after == null || $ok == 1)
+                break;
+
+            $urlSubRel = sprintf("%s/r/%s/new.json?limit=100&after=%s",
+                ENDPOINT_OAUTH,
+                $subreddit,
+                $after
+            );
+
+            $data = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        }
+
+        $info = [
+            "x" => $days,
+            "y" => $numberOfPosts
+        ];
+
+        return $info;
+    }
+
 }

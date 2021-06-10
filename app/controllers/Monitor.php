@@ -61,8 +61,8 @@ class Monitor extends Controller {
                     "posts" => $this->requests->getSubredditPosts($subreddit),
                     "about" => $this->requests->getSubredditInfo($subreddit),
                     "todayStatistics" => $this->requests->getNumberOfUpvotesPostsComments($subreddit),
-                    "datasetPostsDay" => $this->requests->processDataset($posts),
-                    "datasetCommentsDay" => $this->requests->processDataset($comments),
+                    "dataset" => $this->requests->getNumberOfCommentsAndDays($subreddit),
+                    "datasetPostsDayMonth" => $this->requests->getPostPerDayInAMonth($subreddit),
                     "moderators" => $this->requests->getModerators($subreddit),
                     "usersWithMostPosts" => $this->requests->calculateUsersWithMostPosts($posts),
                     "usersWithMostComments" => $this->requests->calculateUsersWithMostComments($comments)

@@ -112,119 +112,71 @@
                 <tr><td>${s.score}</td><td>${s.num_comments}</td> <td><a href="https://www.reddit.com${s.permalink}" target=\"_blank\">${s.title}</a></td> <td><a href="https://www.reddit.com/u/${s.author}">/u/${s.author} </a></td></tr>`).join('') +`</tbody>` 
           ;
         }
-        
         </script>
         <h1> Statistics </h1>
         <div class="graphs">
-        <div class="statistics">
-           <div id="comments"></div>
-           <div id="posts"></div>
-        </div>    
-           <script>
-               var x_set = <?php echo json_encode(array_keys($data['datasetCommentsDay']));?>;
-               var y_set = <?php echo json_encode(array_values($data['datasetCommentsDay']));?>;
-               var data =[
+            <div class="statistics">
+                <div id="comments"></div>
+                <div id="posts"></div>
+            </div>
+            <script>
+                var x_set = <?php echo json_encode($data['dataset']['x']);?>;
+                var y_set = <?php echo json_encode($data['dataset']['y']);?>;
+                var data =[
                 {
                     x: x_set,
                     y: y_set,
                     type: 'bar'
                 }
-               ];
-               var layout = {
-                    title : 'Number of comments per Top Post in a day',
-                    paper_bgcolor : 'rgba(0, 0, 0, 0)',
-                    plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
-               };
-
-               var buttons = {
-                    modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
-                    modeBarButtonsToAdd:[{
-                        name: 'Download SVG format',
-                        icon: Plotly.Icons.camera,
-                        click: function(gd){
-                            Plotly.downloadImage(gd, {format: 'svg'})
-                    }
-                    }]
-                };
-               Plotly.newPlot('comments', data, layout, buttons);
-           </script>
-
-           <script>
-                var x_set = <?php echo json_encode(array_keys($data['datasetPostsDay']));?>;
-                var y_set = <?php echo json_encode(array_values($data['datasetPostsDay']));?>;
-
-                var data =[
-                    {
-                        x: x_set,
-                        y: y_set,
-                        type: 'scatter'
-                    }
                 ];
                 var layout = {
-                    title : 'Posts per day in a month',
-                    paper_bgcolor : 'rgba(0, 0, 0, 0)',
-                    plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
-                };
+                title : 'Number of comments per Top Post in a day',
+                paper_bgcolor : 'rgba(0, 0, 0, 0)',
+                plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
+            };
 
                 var buttons = {
-                    modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
-                    modeBarButtonsToAdd:[{
-                        name: 'Download SVG format',
-                        icon: Plotly.Icons.camera,
-                        click: function(gd){
-                            Plotly.downloadImage(gd, {format: 'svg'})
+                modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+                modeBarButtonsToAdd:[{
+                name: 'Download SVG format',
+                icon: Plotly.Icons.camera,
+                click: function(gd){
+                Plotly.downloadImage(gd, {format: 'svg'})
+            }
+            }]
+            };
+                Plotly.newPlot('comments', data, layout, buttons);
+        </script>
+
+        <script>
+            var x_set = <?php echo json_encode($data['datasetPostsDayMonth']['x']);?>;
+            var y_set = <?php echo json_encode($data['datasetPostsDayMonth']['y']);?>;
+
+            var data =[
+                {
+                    x: x_set,
+                    y: y_set,
+                    type: 'scatter'
+                }
+            ];
+            var layout = {
+                title : 'Posts per day in a month',
+                paper_bgcolor : 'rgba(0, 0, 0, 0)',
+                plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
+            };
+
+            var buttons = {
+                modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+                modeBarButtonsToAdd:[{
+                    name: 'Download SVG format',
+                    icon: Plotly.Icons.camera,
+                    click: function(gd){
+                        Plotly.downloadImage(gd, {format: 'svg'})
                     }
-                    }]
-                };
-                Plotly.newPlot('posts', data, layout, buttons);
-           </script>
-            <div class="graphsFilters">
-                <div class="downloadAs">
-                    Download as: <span><button class="chooseBtn">SVG</button></span> / <span><button class="chooseBtn">CSV</button></span> <span><button class="dwnldBtn"><span class="material-icons">file_download</span></button></span>
-                </div>
-                <div class="filters">
-                    Filter graph by: <span>
-                    <select name="ChooseOption" id="filter">
-                        <option value="posts">Posts</option>
-                        <option value="time">Time</option>
-                        <option value="usertime">Usertime</option>
-                </select>
-            </span>
-                </div>
-                <div class="chooseUsers">
-                    <input type="text" id="searchUsers" onkeyup="searchUsers()" onclick="document.getElementById('userList').style.display = 'block';" placeholder="Search for names.." title="Type in a name">
-                    <ul id="userList" style="display:none" >
-                        <li><label for="01"><input type="checkbox" name="" id="01" value="01">User01</label></li>
-                        <li><label for="02"><input type="checkbox" name="" id="02" value="02">User02</label></li>
-                        <li><label for="03"><input type="checkbox" name="" id="03" value="03">User03</label></li>
-                        <li><label for="04"><input type="checkbox" name="" id="04" value="04">User04</label></li>
-                        <li><label for="05"><input type="checkbox" name="" id="05" value="05">User05</label></li>
-                        <li><label for="06"><input type="checkbox" name="" id="06" value="06">User06</label></li>
-                        <li><label for="07"><input type="checkbox" name="" id="07" value="07">User07</label></li>
-                        <li><label for="08"><input type="checkbox" name="" id="08" value="08">User08</label></li>
-                        <li><label for="09"><input type="checkbox" name="" id="09" value="09">User09</label></li>
-                        <li><label for="10"><input type="checkbox" name="" id="10" value="10">User10</label></li>
-                    </ul>
-                    <script>
-                        function searchUsers() {
-                            var input, filter, ul, li, la, i, txtValue;
-                            input = document.getElementById("searchUsers");
-                            filter = input.value.toUpperCase();
-                            ul = document.getElementById("userList");
-                            li = ul.getElementsByTagName("li");
-                            for (i = 0; i < li.length; i++) {
-                                la = li[i].getElementsByTagName("label")[0];
-                                txtValue = la.textContent || la.innerText;
-                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                    li[i].style.display = "";
-                                } else {
-                                    li[i].style.display = "none";
-                                }
-                            }
-                        }
-                    </script>
-                </div>
-            </div>
+                }]
+            };
+            Plotly.newPlot('posts', data, layout, buttons);
+        </script>
         </div>
 
         <section id="list-tables">
