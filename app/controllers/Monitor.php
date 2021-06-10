@@ -52,7 +52,23 @@ class Monitor extends Controller {
                 header("Location: " . URLROOT . "/monitor");
                 exit();
             } else {
-
+                if($this->userModel->subredditInfoExists($subreddit, false)){
+                    $x= $this->userModel->subredditInfoExists($subreddit, true);
+                    
+                    var_dump($x);
+                    $data = [
+                        "current_subreddit" => $subreddit,
+                        "subreddits" => $this->userModel->getSubreddits($this->userToken),
+                        "posts" => $x,
+                        "about" => $this->requests->getSubredditInfo($subreddit),
+                        "todayStatistics" => $this->requests->getNumberOfUpvotesPostsComments($subreddit),
+                        "dataset" => $this->requests->getNumberOfCommentsAndDays($subreddit),
+                        "datasetPostsDayMonth" => $this->requests->getPostPerDayInAMonth($subreddit),
+                        "moderators" => $this->requests->getModerators($subreddit)
+                    ];
+                    $this->view('monitor', $data);
+                }
+                else{
                 $data = [
                     "current_subreddit" => $subreddit,
                     "subreddits" => $this->userModel->getSubreddits($this->userToken),
@@ -63,9 +79,21 @@ class Monitor extends Controller {
                     "datasetPostsDayMonth" => $this->requests->getPostPerDayInAMonth($subreddit),
                     "moderators" => $this->requests->getModerators($subreddit)
                 ];
+                for($i = 0; $i < count($data['posts']['subreddit']); $i++){
+                    $this->userModel->subredditInfoInsert($subreddit, $data['posts']['title'][$i], $data['posts']['author'][$i], $data['posts']['number_comments'][$i], $data['posts']['score'][$i],$data['posts']['permalink'][$i],$data['posts']['created_utc'][$i]);
+                }
                 $this->view('monitor', $data);
+                }
+                
             }
         }
+    }
+
+    public function test($subreddit){
+        $data=[
+            "posts" =>$this->requests->getSubredditPosts($subreddit)
+        ];
+        var_dump($data['posts']);
     }
 
     public function logout(){

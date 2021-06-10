@@ -69,19 +69,19 @@
                 </thead>
                 <tbody>
                 <?php
-                    for($i = 0; $i < $data['posts']->data->dist; $i++){
+                    for($i = 0; $i < count($data['posts']['subreddit']); $i++){
                         echo "<tr>";
                             echo "<td>";
-                                echo $data['posts']->data->children[$i]->data->score;
+                                echo $data['posts']['score'][$i];
                             echo "</td>";
                             echo "<td>";
-                                echo $data['posts']->data->children[$i]->data->num_comments;
+                                echo $data['posts']['number_comments'][$i];
                             echo "</td>";
                             echo "<td>";
-                                echo "<a href= http://www.reddit.com/" . $data['posts']->data->children[$i]->data->permalink . " target=\"_blank\">" . $data['posts']->data->children[$i]->data->title . "</a>";
+                                echo "<a href= http://www.reddit.com/" . $data['posts']['permalink'][$i] . " target=\"_blank\">" . $data['posts']['title'][$i] . "</a>";
                             echo "</td>";
                             echo "<td>";
-                                echo "<a href= ". "\"http://www.reddit.com/user/". $data['posts']->data->children[$i]->data->author . "\" target=\"_blank\">"."u/".$data['posts']->data->children[$i]->data->author ."</a>";
+                                echo "<a href= ". "\"http://www.reddit.com/user/". $data['posts']['author'][$i] . "\" target=\"_blank\">"."u/".$data['posts']['author'][$i] ."</a>";
                             echo "</td>";
                         echo "</tr>";
                     }

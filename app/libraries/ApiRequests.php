@@ -27,14 +27,79 @@ class ApiRequests
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
 
-    public function getSubredditPosts($subreddit, $when = "top", $time = "today"){
+    public function getSubredditPosts($subreddit, $when = "top", $time = "today", $more = false){
         $urlSubRel = sprintf("%s/r/%s/%s.json?t=%s",
         ENDPOINT_OAUTH,
         $subreddit,
         $when,
         $time
         );
-        return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        $req = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        $subreddit_arr = array();
+        $title = array();
+        $author = array();
+        $number_comments = array();
+        $score = array();
+        $permalink = array();
+        $created_utc = array();
+
+        foreach($req->data->children as $child){
+            array_push($subreddit_arr, $subreddit);
+            array_push($title, $child->data->title);
+            array_push($author, $child->data->author);
+            array_push($number_comments, $child->data->num_comments);
+            array_push($score, $child->data->score);
+            array_push($permalink, $child->data->permalink);
+            array_push($created_utc, $child->data->created_utc);
+        }
+        $query_param = [
+            "subreddit" => $subreddit_arr,
+            "title" => $title,
+            "author" => $author,
+            "number_comments" => $number_comments,
+            "score" => $score,
+            "permalink" => $permalink,
+            "created_utc" => $created_utc
+        ];
+        
+        if($more){
+            while(!empty($req)){
+                $after = $req->data->after;
+                $urlSubRel = sprintf("%s/r/%s/%s.json?t=%s&after=%s",
+                ENDPOINT_OAUTH,
+                $subreddit,
+                $when,
+                $time,
+                $after
+                );
+
+                $req = Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+                foreach($req->data->children as $child){
+                    array_push($subreddit_arr, $subreddit);
+                    array_push($title, $child->data->title);
+                    array_push($author, $child->data->author);
+                    array_push($number_comments, $child->data->num_comments);
+                    array_push($score, $child->data->score);
+                    array_push($permalink, $child->data->permalink);
+                    array_push($created_utc, $child->data->created_utc);
+                }
+
+                if($after == null)
+                    break;
+            }
+            $query_param = [
+                "subreddit" => $subreddit_arr,
+                "title" => $title,
+                "author" => $author,
+                "number_comments" => $number_comments,
+                "score" => $score,
+                "permalink" => $permalink,
+                "created_utc" => $created_utc
+            ];
+            return $query_param;
+        }
+        else
+            return $query_param;
     }
 
     public function getSubredditInfo($subreddit){
