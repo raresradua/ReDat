@@ -52,29 +52,11 @@ class Monitor extends Controller {
                 header("Location: " . URLROOT . "/monitor");
                 exit();
             } else {
-<<<<<<< HEAD
-                if($this->userModel->subredditInfoExists($subreddit, false)){
-                    $x= $this->userModel->subredditInfoExists($subreddit, true);
-                    
-                    var_dump($x);
-                    $data = [
-                        "current_subreddit" => $subreddit,
-                        "subreddits" => $this->userModel->getSubreddits($this->userToken),
-                        "posts" => $x,
-                        "about" => $this->requests->getSubredditInfo($subreddit),
-                        "todayStatistics" => $this->requests->getNumberOfUpvotesPostsComments($subreddit),
-                        "dataset" => $this->requests->getNumberOfCommentsAndDays($subreddit),
-                        "datasetPostsDayMonth" => $this->requests->getPostPerDayInAMonth($subreddit),
-                        "moderators" => $this->requests->getModerators($subreddit)
-                    ];
-                    $this->view('monitor', $data);
-                }
-                else{
-=======
+
                 $posts = $this->requests->getMostRecentPosts($subreddit, 500);
                 $comments = $this->requests->getMostRecentComments($subreddit, 500);
 
->>>>>>> 910729f6ad7c79a117cbc184cc1876e22d78a435
+
                 $data = [
                     "current_subreddit" => $subreddit,
                     "subreddits" => $this->userModel->getSubreddits($this->userToken),
@@ -95,7 +77,6 @@ class Monitor extends Controller {
                 
             }
         }
-    }
 
     public function test($subreddit){
         $data=[
