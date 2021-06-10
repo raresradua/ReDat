@@ -121,8 +121,8 @@
            <div id="posts"></div>
         </div>    
            <script>
-               var x_set = <?php echo json_encode($data['dataset']['x']);?>; 
-               var y_set = <?php echo json_encode($data['dataset']['y']);?>;
+               var x_set = <?php echo json_encode(array_keys($data['datasetCommentsDay']));?>;
+               var y_set = <?php echo json_encode(array_values($data['datasetCommentsDay']));?>;
                var data =[
                 {
                     x: x_set,
@@ -150,8 +150,8 @@
            </script>
 
            <script>
-                var x_set = <?php echo json_encode($data['datasetPostsDayMonth']['x']);?>;
-                var y_set = <?php echo json_encode($data['datasetPostsDayMonth']['y']);?>;
+                var x_set = <?php echo json_encode(array_keys($data['datasetPostsDay']));?>;
+                var y_set = <?php echo json_encode(array_values($data['datasetPostsDay']));?>;
 
                 var data =[
                     {
@@ -251,70 +251,56 @@
                 </table>
             </div>
             <div id="tables">
-                <h2>2nd table</h2>
+                <h2>Users with most posts</h2>
                 <table id="tablestyle">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Subreddit</th>
-                        <th>Growth %</th>
+                        <th>Name</th>
+                        <th>Posts</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>memes</td>
-                        <td>23%</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>cats</td>
-                        <td>10%</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>cats</td>
-                        <td>10%</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>oops</td>
-                        <td>20%</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>dogs</td>
-                        <td>10%</td>
-                    </tr>
+                    <?php
+                    $arr_keys = array_keys($data["usersWithMostPosts"]);
+                    foreach ($arr_keys as $arr_key) {
+                        echo "<tr>";
+                        echo "<td>";
+                        $val = "<a href='http://reddit.com/u/" . $arr_key . "'>" . "u/".$arr_key . "</a>";
+                        echo $val;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $data["usersWithMostPosts"][$arr_key];
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
             <div id="tables">
-                <h2>3rd table</h2>
+                <h2>Users with most comments</h2>
                 <table id="tablestyle">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Subreddit</th>
-                        <th>Growth %</th>
+                        <th>Name</th>
+                        <th>Comments</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>memes</td>
-                        <td>23%</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>cats</td>
-                        <td>10%</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>bats</td>
-                        <td>10%</td>
-                    </tr>
+                    <?php
+                    $arr_keys = array_keys($data["usersWithMostComments"]);
+                    foreach ($arr_keys as $arr_key) {
+                        echo "<tr>";
+                        echo "<td>";
+                        $val = "<a href='http://reddit.com/u/" . $arr_key . "'>" . "u/".$arr_key . "</a>";
+                        echo $val;
+                        echo "</td>";
+                        echo "<td>";
+                        echo $data["usersWithMostComments"][$arr_key];
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>

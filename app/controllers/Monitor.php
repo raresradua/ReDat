@@ -52,6 +52,8 @@ class Monitor extends Controller {
                 header("Location: " . URLROOT . "/monitor");
                 exit();
             } else {
+                $posts = $this->requests->getMostRecentPosts($subreddit, 500);
+                $comments = $this->requests->getMostRecentComments($subreddit, 500);
 
                 $data = [
                     "current_subreddit" => $subreddit,
@@ -59,9 +61,11 @@ class Monitor extends Controller {
                     "posts" => $this->requests->getSubredditPosts($subreddit),
                     "about" => $this->requests->getSubredditInfo($subreddit),
                     "todayStatistics" => $this->requests->getNumberOfUpvotesPostsComments($subreddit),
-                    "dataset" => $this->requests->getNumberOfCommentsAndDays($subreddit),
-                    "datasetPostsDayMonth" => $this->requests->getPostPerDayInAMonth($subreddit),
-                    "moderators" => $this->requests->getModerators($subreddit)
+                    "datasetPostsDay" => $this->requests->processDataset($posts),
+                    "datasetCommentsDay" => $this->requests->processDataset($comments),
+                    "moderators" => $this->requests->getModerators($subreddit),
+                    "usersWithMostPosts" => $this->requests->calculateUsersWithMostPosts($posts),
+                    "usersWithMostComments" => $this->requests->calculateUsersWithMostComments($comments)
                 ];
                 $this->view('monitor', $data);
             }
