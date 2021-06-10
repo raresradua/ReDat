@@ -27,7 +27,6 @@
                                 var form = document.getElementById("searchForm");
                                 form.action = "http://localhost/ReDat/monitor/" + val; // form.action = "https://re-dat.herokuapp.com/monitor/" + val;
                                 form.submit();
-                                
                             }
                         }
                     }

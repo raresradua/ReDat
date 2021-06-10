@@ -147,6 +147,87 @@ class ApiRequests
         return $info;
     }
 
+    public function getMostRecentPosts($subreddit, $size){
+        $before = time();
+        $oneMonthTime = 2678400;
+        $posts = array();
+        while (count($posts) < 1000) {
+            $url = sprintf("%s/submission/?subreddit=%s&after=%d&before=%d&sort=desc&sort_type=created_utc&size=%d&fields=author,title,full_link,created_utc,full_text",
+                PUSHSHIFT_API,
+                $subreddit,
+                $before - $oneMonthTime,
+                $before,
+                $size
+            );
+            $tmp = Request::runCurl($url);
+            if (empty($tmp->data)){
+                break;
+            }
+            $posts = array_merge($posts, $tmp->data);
+            $before = end($posts)->created_utc;
+        }
+
+        return $posts;
+    }
+
+    public function getMostRecentComments($subreddit, $size){
+        $before = time();
+        $oneMonthTime = 2678400;
+        $comments = array();
+        while (count($comments) < 10000) {
+            $url = sprintf("%s/comment/?subreddit=%s&after=%d&before=%d&sort=desc&sort_type=created_utc&size=%d&fields=author,title,full_link,created_utc,full_text",
+                PUSHSHIFT_API,
+                $subreddit,
+                $before - $oneMonthTime,
+                $before,
+                $size
+            );
+            $tmp = Request::runCurl($url);
+            if (empty($tmp->data)){
+                break;
+            }
+            $comments = array_merge($comments, $tmp->data);
+            $before = end($comments)->created_utc;
+        }
+
+        return $comments;
+    }
+
+    public function calculateUsersWithMostPosts($posts){
+        $users = array();
+        foreach($posts as $post){
+            array_push($users, $post->author);
+        }
+        $values = array_count_values($users);
+        arsort($values);
+        return array_slice($values, 0, 10, true);
+    }
+
+    public function calculateUsersWithMostComments($comments){
+        $users = array();
+        foreach($comments as $comment){
+            array_push($users, $comment->author);
+        }
+        $values = array_count_values($users);
+        arsort($values);
+        return array_slice($values, 0, 10, true);
+    }
+
+    public function processDataset($posts){
+        $data = array();
+        foreach($posts as $post){
+            $epoch = $post->created_utc;
+            $dt = new DateTime("@$epoch");
+            $dt = $dt->format('Y-m-d');
+            if (array_key_exists($dt, $data)){
+                $data[$dt] += 1;
+            } else {
+                $data[$dt] = 0;
+            }
+        }
+        return $data;
+    }
+
     public function getNumberOfCommentsAndDays($subreddit){
         $numberOfComments = array();
         $days = array();
@@ -243,5 +324,25 @@ class ApiRequests
         );
 
         return Request::runCurl($url, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+    }
+
+    public function getUserComments($subreddit, $user){
+        $url = sprintf("%s/comment/?subreddit=%s&author=%s&size=500",
+            PUSHSHIFT_API,
+            $subreddit,
+            $user
+        );
+
+        return Request::runCurl($url);
+    }
+
+    public function getUserPosts($subreddit, $user){
+        $url = sprintf("%s/submission/?subreddit=%s&author=%s&size=500",
+            PUSHSHIFT_API,
+            $subreddit,
+            $user
+        );
+
+        return Request::runCurl($url);
     }
 }

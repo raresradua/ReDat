@@ -9,6 +9,7 @@ define('OAUTH_TOKEN', 'https://www.reddit.com/api/v1/access_token');
 define('OAUTH_AUTHORIZE', 'https://www.reddit.com/api/v1/authorize');
 define('ENDPOINT_OAUTH', 'https://oauth.reddit.com');
 
+define('PUSHSHIFT_API', "https://api.pushshift.io/reddit/search");
 
 define('CLIENT_ID', 'fT6K-sNPAMkRbA');
 define('CLIENT_SECRET', 'gZZMK_IFDYhdr93FPAl6nb1BUmHW-g');
