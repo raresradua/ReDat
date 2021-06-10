@@ -65,7 +65,8 @@ class Monitor extends Controller {
                     "datasetPostsDayMonth" => $this->requests->getPostPerDayInAMonth($subreddit),
                     "moderators" => $this->requests->getModerators($subreddit),
                     "usersWithMostPosts" => $this->requests->calculateUsersWithMostPosts($posts),
-                    "usersWithMostComments" => $this->requests->calculateUsersWithMostComments($comments)
+                    "usersWithMostComments" => $this->requests->calculateUsersWithMostComments($comments),
+                    "commonWords" => $this->requests->getCommonWords($posts, $comments)
                 ];
                 $this->view('monitor', $data);
             }

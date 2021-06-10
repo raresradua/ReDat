@@ -118,6 +118,7 @@
             <div class="statistics">
                 <div id="comments"></div>
                 <div id="posts"></div>
+                <div id="commonWords"></div>
             </div>
             <script>
                 var x_set = <?php echo json_encode($data['dataset']['x']);?>;
@@ -176,6 +177,36 @@
                 }]
             };
             Plotly.newPlot('posts', data, layout, buttons);
+        </script>
+
+        <script>
+            var x_set = <?php echo json_encode(array_keys($data['commonWords']));?>;
+            var y_set = <?php echo json_encode(array_values($data['commonWords']));?>;
+
+            var data =[
+                {
+                    values: y_set,
+                    labels: x_set,
+                    type: 'pie'
+                }
+            ];
+            var layout = {
+                title : 'Posts per day in a month',
+                paper_bgcolor : 'rgba(0, 0, 0, 0)',
+                plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
+            };
+
+            var buttons = {
+                modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+                modeBarButtonsToAdd:[{
+                    name: 'Download SVG format',
+                    icon: Plotly.Icons.camera,
+                    click: function(gd){
+                        Plotly.downloadImage(gd, {format: 'svg'})
+                    }
+                }]
+            };
+            Plotly.newPlot('commonWords', data, layout, buttons);
         </script>
         </div>
 
