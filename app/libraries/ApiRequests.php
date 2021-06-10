@@ -179,4 +179,24 @@ class ApiRequests
 
         return Request::runCurl($url, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
+
+    public function getUserComments($subreddit, $user){
+        $url = sprintf("%s/comment/?subreddit=%s&author=%s&size=500",
+            PUSHSHIFT_API,
+            $subreddit,
+            $user
+        );
+
+        return Request::runCurl($url);
+    }
+
+    public function getUserPosts($subreddit, $user){
+        $url = sprintf("%s/submission/?subreddit=%s&author=%s&size=500",
+            PUSHSHIFT_API,
+            $subreddit,
+            $user
+        );
+
+        return Request::runCurl($url);
+    }
 }
