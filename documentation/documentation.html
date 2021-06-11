@@ -20,7 +20,7 @@
                             <meta property="schema:givenName" content="Vlad">
                             <meta property="schema:additionalName" content="Iulian">
                             <meta property="schema:familyName" content="Cociorva">
-                            <span property="schema:name">Vlad Iulian Cociorva </span>
+                            <span property="schema:name"><a href="https://github.com/vladcociorva/">Vlad Iulian Cociorva</a> </span>
                         </span>
                     </li>
                     <li typeof="sa:ContributorRole" property="schema:author">
@@ -28,7 +28,7 @@
                             <meta property="schema:givenName" content="Rares">
                             <meta property="schema:additionalName" content="Aurelian">
                             <meta property="schema:familyName" content="Radu">
-                            <span property="schema:name">Rares Aurelian Radu </span>
+                            <span property="schema:name"><a href="https://github.com/raresradua/">Rares Aurelian Radu</a> </span>
                         </span>
                     </li>
                 </ul>
@@ -73,25 +73,23 @@
                 <img src="./images/sign-in-page.png" alt="SingIn">
             </div>
             <h3> 3.2 Pagina principala</h3>
-            <p>Dupa ce user-ul se autentifica, va fi redirectionat pe aceasta pagina, care va pune la dispozitie informatii legate de un anumit subreddit. Cateva dintre informatiile pe care le va putea vizualiza constau in cele mai populare postari, cine
-                le-a postat, numarul de comentarii. Acesta va putea vedea si diagrame de tip scatter plots, bar plots, pie charts pe care le va putea filtra in functie de numarul postarilor, cand s-au postat si cine le-a postat. De asemenea, va putea
-                vedea comparatii intre userii cei mai activi ale acelui subreddit. Aceste diagrame vor putea fi descarcate in format SVG sau CSV.
+            <p>Dupa ce user-ul se autentifica, va fi redirectionat pe aceasta pagina, care va pune la dispozitie informatii legate de un anumit subreddit. Va putea vizualiza cele mai populare postari de astazi, din saptamana aceasta, de luna aceasta sau
+                de anul acesta, precum si cine a postat impreuna cu numarul de comentarii si upvotes. Va putea vizualiza si descarca diagrame care arata numarul de comentarii per Top Post dintr-o zi, statistica este facuta pentru o perioada de o luna.
+                Grafic care arata fluctuarea numarului de postari din ultima luna si un pie chart care evidentiaza cele mai folosite cuvinte din utlimele 1000 de postari. In josul paginii sunt puse la dispozitie tabele cu moderatorii subreddit-ului, utilizatorii
+                care au postat cel mai des in subreddit precum si numarul postarilor sale si utilizatorii cu cele mai multe comentarii impreuna cu numarul de comentarii.
             </p>
 
-            <div class="carousel">
-                <nav class="nav-carousel">
-                    <a href="#first"><img class="nav-img" src="./images/main-page-1.png" alt="First"></a>
-                    <a href="#second"><img class="nav-img" src="./images/main-page-2.png" alt="Second"></a>
-                    <a href="#third"><img class="nav-img" src="./images/main-page-3.png" alt="Third"></a>
-                </nav>
-
-                <div class="img-gallery">
-                    <img id="first" src="./images/main-page-1.png" alt="First">
-                    <img id="second" src="./images/main-page-2.png" alt="Second">
-                    <img id="third" src="./images/main-page-3.png" alt="Third">
+            <div class="main">
+                <div class="imageM">
+                    <img src="./images/main-statistics-1.png" alt="main">
+                </div>
+                <div class="imageM">
+                    <img src="./images/main-statistics-2.png" alt="main">
+                </div>
+                <div class="imageM">
+                    <img src="./images/main-statistics-3.png" alt="main">
                 </div>
             </div>
-
 
             <h3> 3.3 Documentatia API-ului</h3>
             <p>In aceasta pagina se ofera documentatia API-ului oferit de aplicatia noastra web.</p>
@@ -100,10 +98,17 @@
             <div class="image">
                 <img src="./images/api.png" alt="api">
             </div>
-            <h3> 3.4 Contact</h3>
-            <p>Aceasta pagina este destinata utilizatorilor care doresc sa ia contact cu echipa ReDat si pentru a le trimite un mesaj, feedback sau pentru a putea le pune intrebari.</p>
-            <br>
-            <p>Utilizatorii trebuie sa ofera numele complet, o adresa de email valida si un mesaj pentru echipa ReDat.</p>
+            <p>
+                Fara a utiliza front-end-ul aplicatiei, un utilizator poate, face apeluri catre API pentru a putea lua anumite informatii despre un subreddit <b>/api/r/{nume_subreddit}</b>, precum si a vedea cate postari sau comentarii a lasat un anumit
+                utilizator intr-un subreddit <b>/api/r/{nume_subreddit}/{username}</b>
+            </p>
+
+            <div class="main">
+                <div class="imageM">
+                    <img src="./images/api-1.png" alt="api1">
+                    <img src="./images/api-2.png" alt="api2">
+                </div>
+            </div>
 
         </section>
 
@@ -111,7 +116,14 @@
             <h2>4. Navigation Bar si Footer</h2>
 
             <h3> 4.1 Navigation Bar</h3>
-            <p>Bara de navigatie consta intr-o bara de cautare in care user-ul logat poate introduce numele unui subreddit si astfel va putea vizualiza statistici pentru acesta</p>
+            <p>Bara de navigatie consta intr-o bara de cautare in care user-ul logat poate introduce numele unui subreddit la care este abonat si astfel va putea vizualiza statistici pentru acesta. Este un dropdown list cu toate subreddit-urile unui abonat,
+                care pentru fiecare litera introdusa de un utilizator, se vor afisa subreddit-urile cu acel prefix</p>
+            <div class="main">
+                <div class="imageM">
+                    <img src="./images/nav-1.png" alt="nav1">
+                    <img src="./images/nav-2.png" alt="nav2">
+                </div>
+            </div>
             <br>
             <p>De asemenea sunt si doua butoane. Butonul API redirectioneaza user-ul spre pagina care contine documentatia API-ului. Butonul LogOut va deloga user-ul.</p>
             <h3> 4.2 Footer</h3>
@@ -119,13 +131,52 @@
         </section>
 
         <section>
-            <h2> 5. Referinte </h2>
+            <h2>5. Detalii de implementare</h2>
+            <h3>5.1 SignIn</h3>
+            <p>Pentru ca un utilizator sa se poata loga cu reddit-ul, ne-am folosit de API-ul public de la Reddit si de documentatia pentru autentificarea cu <a href="https://github.com/reddit-archive/reddit/wiki/oauth2">OAuth2</a></p>
+            <p>Ne-am folosit de cURL pentru a face GET request si prelua acces_token-ul, iar intr-un COOKIE am memorat header-ul Authorization in forma {token_type} : {acces_token} </p>
+            <div class="imageM">
+                <img src="./images/signin.png" alt="sign">
+            </div>
+            <h3>Fiecare statistica a fost preluata facand GET request-uri folosind API-ul public de la Reddit si primind ca raspuns JSON-uri cu informatiile care sunt documentate in <a href="https://www.reddit.com/dev/api/">documentatia API-ului de la Reddit</a></h3>
+            <div class="imageM">
+                <img src="./images/requests.png" alt="req">
+            </div>
+            <h3>5.2 Top Posts table</h3>
+            <p>Avem o functie async updateTopPosts, await fetch(`https://www.reddit.com/r/${location.pathname.split("/").pop()}/top.json?t=${timePeriod}`) face un request catre url-ul din paranteza, iar datorita keyword-ului await, functia updateTopPosts
+                este pusa in asteptare pana cand request-ul este facut. Cand request-ul este gata, din raspunsul primit extragem un obiect de tip JSON, iar la final submissions va contine informatiile de care avem nevoie pentru tabelul nostru.</p>
+            <div class="imageM">
+                <img src="./images/async.png" alt="async">
+            </div>
+            <h3>Grafice Plotly</h3>
+            <p>Pentru afisarea plot-urilor, am folosit libraria oferita de Plotly. Datele diagramelor sunt preluate cu ajutorul request-urilor catre Reddit API-ului si folosite pentru a crea plot-uri de tip linie, bar si pie</p>
+            <div class="imageM">
+                <img src="./images/async.png" alt="plotly">
+            </div>
+        </section>
+
+        <section>
+            <h2>6. Video de prezentare</h2>
+            <iframe allowfullscreen src="#"></iframe>
+        </section>
+
+        <section>
+            <h2> 7. Referinte </h2>
             <ul>
                 <li> <a href="https://developer.mozilla.org/en-US/">MDN</a></li>
                 <li> <a href="https://profs.info.uaic.ro/~busaco/teach/courses/web/"> TW Course</a></li>
                 <li> <a href="https://subredditstats.com/"> Subreddit Stats</a></li>
                 <li> <a href="https://plotly.com/"> Plotly </a></li>
                 <li><a href="https://coolors.co/palettes/trending">Coolors</a></li>
+                <li>
+                    <a href="https://www.reddit.com/dev/api/">Reddit API</a>
+                </li>
+                <li>
+                    <a href="https://github.com/reddit-archive/reddit/wiki/oauth2">OAuth2 for Reddit</a>
+                </li>
+                <li>
+                    <a href="https://dmitripavlutin.com/javascript-fetch-async-await/">Fetch with Async and Await</a>
+                </li>
             </ul>
         </section>
 
