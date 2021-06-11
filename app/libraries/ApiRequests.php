@@ -45,7 +45,7 @@ class ApiRequests
         return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
     }
 
-    public function getNumberOfUpvotesPostsComments($subreddit){
+    public function getSubredditStats($subreddit){
         $urlSubRel = sprintf("%s/r/%s/top.json?limit=100&t=today",
         ENDPOINT_OAUTH,
         $subreddit
@@ -87,7 +87,7 @@ class ApiRequests
         $oneMonthTime = 2678400;
         $posts = array();
         while (count($posts) < 1000) {
-            $url = sprintf("%s/submission/?subreddit=%s&after=%d&before=%d&sort=desc&sort_type=created_utc&size=%d&fields=author,title,full_link,created_utc,full_text",
+            $url = sprintf("%s/submission/?subreddit=%s&after=%d&before=%d&sort=desc&sort_type=created_utc&size=%d&fields=author,title,full_link,created_utc,selftext",
                 PUSHSHIFT_API,
                 $subreddit,
                 $before - $oneMonthTime,
@@ -110,7 +110,7 @@ class ApiRequests
         $oneMonthTime = 2678400;
         $comments = array();
         while (count($comments) < 10000) {
-            $url = sprintf("%s/comment/?subreddit=%s&after=%d&before=%d&sort=desc&sort_type=created_utc&size=%d&fields=author,title,full_link,created_utc,body",
+            $url = sprintf("%s/comment/?subreddit=%s&after=%d&before=%d&sort=desc&sort_type=created_utc&size=%d&fields=author,created_utc,body",
                 PUSHSHIFT_API,
                 $subreddit,
                 $before - $oneMonthTime,
@@ -220,7 +220,7 @@ class ApiRequests
         return Request::runCurl($url);
     }
 
-    public function getNumberOfCommentsAndDays($subreddit){
+    public function getNumberOfCommentsPerDay($subreddit){
         $numberOfComments = array();
         $days = array();
 
@@ -259,7 +259,7 @@ class ApiRequests
         return $info;
     }
 
-    public function getPostPerDayInAMonth($subreddit){
+    public function getNumberOfPostsPerDay($subreddit){
         $numberOfPosts = array();
         $days = array();
 

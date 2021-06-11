@@ -22,24 +22,24 @@
     <section class="main-section">
         <div id="subreddit">
             <div>
-                <p><b>Title of subreddit:</b> <?php echo $data['about']->data->title?></p>
-                <p><b>Description:</b> <?php echo $data['about']->data->public_description?></p>
+                <p><b>Title of subreddit:</b> <?php echo $data['about'][0]->title?></p>
+                <p><b>Description:</b> <?php echo $data['about'][0]->public_description?></p>
             </div>
             <div>
-                <p><b>Subscribers:</b> <?php echo $data['about']->data->subscribers?></p>
-                <p><b>Active users:</b> <?php echo $data['about']->data->active_user_count?></p>
+                <p><b>Subscribers:</b> <?php echo $data['about'][0]->subscribers?></p>
+                <p><b>Active users:</b> <?php echo $data['about'][0]->active_user_count?></p>
             </div>
         </div>
 
         <div id="subreddit">
             <div>
-                <p><b>Total number of upvotes today: </b> <?php echo $data['todayStatistics']['upvotes']?></p>
-                <p><b>Total number of comments today: </b> <?php echo $data['todayStatistics']['comments']?></p>
-                <p><b>Total number of posts today: </b> <?php echo $data['todayStatistics']['posts']?></p>
+                <p><b>Total number of upvotes today: </b> <?php echo $data['about'][0]->today_upvotes?></p>
+                <p><b>Total number of comments today: </b> <?php echo $data['about'][0]->today_comments?></p>
+                <p><b>Total number of posts today: </b> <?php echo $data['about'][0]->today_posts?></p>
             </div>
             <div>
-                <p><b>Posts per Subscriber today: </b> <?php echo number_format(($data['about']->data->subscribers != null ? ($data['todayStatistics']['posts'] / $data['about']->data->subscribers):0), 8) . "%";?></p>
-                <p><b>Comments per Subscriber today: </b><?php echo number_format(($data['about']->data->subscribers != null ? ($data['todayStatistics']['comments'] / $data['about']->data->subscribers) : 0), 8) . "%";?></p>
+                <p><b>Posts per Subscriber today: </b> <?php echo number_format(($data['about'][0]->subscribers != null ? ($data['about'][0]->today_posts / $data['about'][0]->subscribers):0), 8) . "%";?></p>
+                <p><b>Comments per Subscriber today: </b><?php echo number_format(($data['about'][0]->subscribers != null ? ($data['about'][0]->today_comments / $data['about'][0]->subscribers) : 0), 8) . "%";?></p>
             </div>
         </div>
 
@@ -69,19 +69,19 @@
                 </thead>
                 <tbody>
                 <?php
-                    for($i = 0; $i < $data['posts']->data->dist; $i++){
+                    for($i = 0; $i < $data['topPosts']->data->dist; $i++){
                         echo "<tr>";
                             echo "<td>";
-                                echo $data['posts']->data->children[$i]->data->score;
+                                echo $data['topPosts']->data->children[$i]->data->score;
                             echo "</td>";
                             echo "<td>";
-                                echo $data['posts']->data->children[$i]->data->num_comments;
+                                echo $data['topPosts']->data->children[$i]->data->num_comments;
                             echo "</td>";
                             echo "<td>";
-                                echo "<a href= http://www.reddit.com/" . $data['posts']->data->children[$i]->data->permalink . " target=\"_blank\">" . $data['posts']->data->children[$i]->data->title . "</a>";
+                                echo "<a href= http://www.reddit.com/" . $data['topPosts']->data->children[$i]->data->permalink . " target=\"_blank\">" . $data['topPosts']->data->children[$i]->data->title . "</a>";
                             echo "</td>";
                             echo "<td>";
-                                echo "<a href= ". "\"http://www.reddit.com/user/". $data['posts']->data->children[$i]->data->author . "\" target=\"_blank\">"."u/".$data['posts']->data->children[$i]->data->author ."</a>";
+                                echo "<a href= ". "\"http://www.reddit.com/user/". $data['topPosts']->data->children[$i]->data->author . "\" target=\"_blank\">"."u/".$data['topPosts']->data->children[$i]->data->author ."</a>";
                             echo "</td>";
                         echo "</tr>";
                     }
@@ -121,8 +121,8 @@
                 <div id="commonWords"></div>
             </div>
             <script>
-                var x_set = <?php echo json_encode($data['dataset']['x']);?>;
-                var y_set = <?php echo json_encode($data['dataset']['y']);?>;
+                var x_set = <?php echo json_encode($data['datasetComments']['x']);?>;
+                var y_set = <?php echo json_encode($data['datasetComments']['y']);?>;
                 var data =[
                 {
                     x: x_set,
@@ -150,8 +150,8 @@
         </script>
 
         <script>
-            var x_set = <?php echo json_encode($data['datasetPostsDayMonth']['x']);?>;
-            var y_set = <?php echo json_encode($data['datasetPostsDayMonth']['y']);?>;
+            var x_set = <?php echo json_encode($data['datasetPosts']['x']);?>;
+            var y_set = <?php echo json_encode($data['datasetPosts']['y']);?>;
 
             var data =[
                 {
@@ -221,7 +221,7 @@
                     </thead>
                     <tbody>
                     <?php
-                        foreach ($data["moderators"]->data->children as $value) {
+                        foreach ($data["moderators"] as $value) {
                             echo "<tr>";
                             echo "<td>";
                             $val = "<a href='http://reddit.com/u/" . $value->name . "'>" . "u/".$value->name . "</a>";
