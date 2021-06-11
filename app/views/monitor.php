@@ -223,7 +223,7 @@
                     csv = csv + x_comments_set[i] + "," + y_comments_set[i] + "\n";
                 }
 
-                document.write(csv);
+                
 
                 var hiddenElement = document.createElement('a');
                 hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
@@ -238,7 +238,7 @@
                     csv = csv + x_posts_set[i] + "," + y_posts_set[i] + "\n"; 
                 }
 
-                document.write(csv);
+                
                 var hiddenElement = document.createElement('a');
                 hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
                 hiddenElement.target = '_blank';   
@@ -252,7 +252,7 @@
                     csv = csv + x_words_set[i] + "," + y_words_set[i] + "\n"; 
                 }
 
-                document.write(csv);
+                
                 var hiddenElement = document.createElement('a');
                 hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
                 hiddenElement.target = '_blank';
@@ -260,10 +260,16 @@
                 hiddenElement.click();
             } 
         </script>
-        <div>
+        <div class = "buttonsParent">
+            <div>
                 <button class="buttons" onclick="download_csv_file_comments()" type ="submit" disabeled>Download CSV Comments Plot</button>
+            </div>
+            <div>
                 <button class="buttons" onclick="download_csv_file_posts()" type ="submit" disabeled>Download CSV Posts Plot</button>
+            </div>
+            <div>
                 <button class="buttons" onclick="download_csv_file_words()" type ="submit" disabeled>Download CSV Words Plot</button>
+            </div>    
         </div>
 
 
