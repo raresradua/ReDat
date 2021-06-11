@@ -24,7 +24,7 @@ class ApiRequests
             $qAfter,
             $qBefore);
 
-        return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        return Request::runCurl($urlSubRel, $authMode='oauth', $token_type= $this->token_type, $access_token= $this->access_token);
     }
 
     public function getSubredditPosts($subreddit, $when = "top", $time = "today"){
@@ -34,7 +34,7 @@ class ApiRequests
         $when,
         $time
         );
-        return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        return Request::runCurl($urlSubRel, $authMode= 'oauth', $token_type= $this->token_type, $access_token= $this->access_token);
     }
 
     public function getSubredditInfo($subreddit){
@@ -42,7 +42,7 @@ class ApiRequests
         ENDPOINT_OAUTH,
         $subreddit    
         );
-        return Request::runCurl($urlSubRel, authMode: 'oauth', token_type: $this->token_type, access_token: $this->access_token);
+        return Request::runCurl($urlSubRel, $authMode= 'oauth', $token_type= $this->token_type, $access_token= $this->access_token);
     }
 
     public function getNumberOfUpvotesPostsComments($subreddit){
@@ -304,6 +304,48 @@ class ApiRequests
         $info = [
             "x" => $days,
             "y" => $numberOfPosts
+        ];
+
+        return $info;
+    }
+
+    public function getSubredditInfoAPI($subreddit){
+        $url = sprintf("https://reddit.com/r/%s/about.json",
+        $subreddit
+        );
+        return Request::runCurl($url);
+    }
+
+    public function getNumberOfUpvotesPostsCommentsAPI($subreddit){
+        $urlSubRel = sprintf("https://reddit.com/r/%s/top.json?limit=100&t=today",
+        $subreddit
+        );
+
+        $data = Request::runCurl($urlSubRel);
+        $countUpvotes = 0;
+        $countPosts = 0;
+        $countComments = 0;
+        
+        while(!empty($data)){
+            $after = $data->data->after;
+            foreach($data->data->children as $child){
+                $countUpvotes += $child->data->score;
+                $countComments += $child->data->num_comments;
+                $countPosts += 1;
+            }
+            $urlSubRel = sprintf("https://reddit.com/r/%s/top.json?limit=100&t=today&after=%s",
+            $subreddit,
+            $after
+            );
+            if($after == null)
+                break;
+            $data = Request::runCurl($urlSubRel);
+        }
+        
+        $info = [
+            "upvotes" => $countUpvotes,
+            "comments" => $countComments,
+            "posts" => $countPosts
         ];
 
         return $info;

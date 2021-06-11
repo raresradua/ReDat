@@ -209,6 +209,63 @@
             Plotly.newPlot('commonWords', data, layout, buttons);
         </script>
         </div>
+        <script>
+            var x_comments_set = <?php echo json_encode($data['dataset']['x']);?>;
+            var y_comments_set = <?php echo json_encode($data['dataset']['y']);?>;
+            var x_posts_set = <?php echo json_encode($data['datasetPostsDayMonth']['x']);?>;
+            var y_posts_set = <?php echo json_encode($data['datasetPostsDayMonth']['y']);?>;
+            var x_words_set = <?php echo json_encode(array_keys($data['commonWords']));?>;
+            var y_words_set = <?php echo json_encode(array_values($data['commonWords']));?>;
+            
+            function download_csv_file_comments(){
+                var csv = "X_comments,Y_comments\n";
+                for(i = 0; i < x_comments_set.length; i++){
+                    csv = csv + x_comments_set[i] + "," + y_comments_set[i] + "\n";
+                }
+
+                document.write(csv);
+
+                var hiddenElement = document.createElement('a');
+                hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+                hiddenElement.target = '_blank';    
+                hiddenElement.download = '1st_plot.csv';
+                hiddenElement.click();
+            }
+
+            function download_csv_file_posts(){
+                var csv = "X_posts,Y_posts\n";
+                for(i = 0; i < x_posts_set.length; i++){
+                    csv = csv + x_posts_set[i] + "," + y_posts_set[i] + "\n"; 
+                }
+
+                document.write(csv);
+                var hiddenElement = document.createElement('a');
+                hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+                hiddenElement.target = '_blank';   
+                hiddenElement.download = '2nd_plot.csv';
+                hiddenElement.click();
+            }
+
+            function download_csv_file_words(){
+                var csv = "X_words,Y_words\n";
+                for(i = 0; i < x_words_set.length; i++){
+                    csv = csv + x_words_set[i] + "," + y_words_set[i] + "\n"; 
+                }
+
+                document.write(csv);
+                var hiddenElement = document.createElement('a');
+                hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+                hiddenElement.target = '_blank';
+                hiddenElement.download = '3rd_plot.csv';
+                hiddenElement.click();
+            } 
+        </script>
+        <div>
+                <button class="buttons" onclick="download_csv_file_comments()" type ="submit" disabeled>Download CSV Comments Plot</button>
+                <button class="buttons" onclick="download_csv_file_posts()" type ="submit" disabeled>Download CSV Posts Plot</button>
+                <button class="buttons" onclick="download_csv_file_words()" type ="submit" disabeled>Download CSV Words Plot</button>
+        </div>
+
 
         <section id="list-tables">
             <div id="tables">
