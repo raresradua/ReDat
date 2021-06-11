@@ -159,7 +159,8 @@ class Monitor extends Controller {
                     }
 
                     try {
-                        $this->userModel->addSubredditRecentPost($subreddit, $value->author, $value->title, $value->full_link, $value->created_utc, $value->selftext);
+                        $this->userModel->addSubredditRecentPost($subreddit, $value->author, $value->title,
+                            $value->full_link, $value->created_utc, $value->selftext);
                     } catch (Exception $e) {
                         continue;
                     }

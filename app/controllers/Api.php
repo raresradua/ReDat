@@ -65,7 +65,7 @@ class Api extends Controller {
 
     private function getSubredditStats($subreddit){
         $info = $this->requests->getSubredditInfo($subreddit);
-        $stats = $this->requests->getNumberOfUpvotesPostsComments($subreddit);
+        $stats = $this->requests->getSubredditStats($subreddit);
         $json = array(
             "title"=>$info->data->title,
             "description"=>$info->data->public_description,
