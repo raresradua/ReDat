@@ -29,6 +29,24 @@ html {
     color: #283618;
 }
 
+.buttonsParent {
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.buttons {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    border-radius: 1em;
+    width: 70%;
+    height: 90%;
+    /* height: 7%; */
+    padding: 5% 0;
+    background-color: rgba(165, 165, 141, 1);
+}
+
 h1 {
     text-align: center;
 }
