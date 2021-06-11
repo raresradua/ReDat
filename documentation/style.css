@@ -71,6 +71,11 @@ p {
     align-content: center;
 }
 
+iframe {
+    width: 50em;
+    height: 30em;
+}
+
 nav>a {
     display: flex;
     min-width: 45vw;
