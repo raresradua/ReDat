@@ -191,7 +191,7 @@
                 }
             ];
             var layout = {
-                title : 'Posts per day in a month',
+                title : 'Most common words',
                 paper_bgcolor : 'rgba(0, 0, 0, 0)',
                 plot_bgcolor : 'rgba(165, 165, 141, 0.9)'
             };
