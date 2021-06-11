@@ -211,10 +211,10 @@
         </div>
 
         <script>
-            var x_comments_set = <?php echo json_encode($data['dataset']['x']);?>;
-            var y_comments_set = <?php echo json_encode($data['dataset']['y']);?>;
-            var x_posts_set = <?php echo json_encode($data['datasetPostsDayMonth']['x']);?>;
-            var y_posts_set = <?php echo json_encode($data['datasetPostsDayMonth']['y']);?>;
+            var x_comments_set = <?php echo json_encode($data['datasetComments']['x']);?>;
+            var y_comments_set = <?php echo json_encode($data['datasetComments']['y']);?>;
+            var x_posts_set = <?php echo json_encode($data['datasetPosts']['x']);?>;
+            var y_posts_set = <?php echo json_encode($data['datasetPosts']['y']);?>;
             var x_words_set = <?php echo json_encode(array_keys($data['commonWords']));?>;
             var y_words_set = <?php echo json_encode(array_values($data['commonWords']));?>;
             
