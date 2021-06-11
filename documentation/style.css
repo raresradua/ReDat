@@ -1,95 +1,104 @@
-        html {
-            box-sizing: border-box;
-            font-family: "Open Sans", sans-serif;
-            font-size: 14px;
-        }
-        
-        body {
-            background-color: #b7b7a4;
-            margin-left: 2%;
-            margin-right: 2%;
-        }
-        
-        h1 {
-            font-size: 3em;
-        }
-        
-        h2,
-        h3 {
-            font-size: 2em;
-        }
-        
-        p {
-            text-indent: 4em;
-            font-size: 1.2em;
-        }
-        
-        .image {
-            margin: 2% 0;
-            display: flex;
-            justify-content: center;
-            align-content: center;
-        }
-        
-        .image>img {
-            border: 2px solid #283618;
-            width: 70%;
-        }
-        
-        .carousel {
-            border: 2px solid #283618;
-            overflow: hidden;
-            height: 100vh;
-            display: grid;
-            grid-template-rows: 2fr 1fr;
-            grid-gap: 10px;
-            @media screen and (min-width: 1200px) {
-                grid-template-columns: 1fr 5fr;
-                grid-template-rows: auto;
-            }
-        }
-        
-        .nav-carousel {
-            overflow-x: scroll;
-            overflow-y: hidden;
-            display: flex;
-            grid-row-start: 2;
-            @media screen and (min-width: 1200px) {
-                overflow-y: scroll;
-                overflow-x: hidden;
-                display: block;
-                grid-row-start: auto;
-            }
-        }
-        
-        nav>a {
-            display: flex;
-            min-width: 45vw;
-            margin-right: 10px;
-            @media screen and (min-width: 1200px) {
-                margin-bottom: 10px;
-                min-height: 200px;
-                min-width: 100%;
-            }
-        }
-        
-        .nav-img {
-            border: 2px solid #283618;
-            object-fit: cover;
-            transition: 0.3s ease all;
-        }
-        
-        .img-gallery {
-            border: 2px solid #283618;
-            overflow-x: scroll;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            display: flex;
-            @media screen and (min-width: 1200px) {
-                display: block;
-                overflow-y: scroll;
-                overflow-x: hidden;
-                scroll-snap-type: y mandatory;
-            }
-        }
+html {
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+
+body {
+    background-color: #b7b7a4;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2,
+h3 {
+    font-size: 2em;
+}
+
+p {
+    text-indent: 4em;
+    font-size: 1.2em;
+}
+
+.image {
+    margin: 2% 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.image>img {
+    border: 2px solid #283618;
+    width: 70%;
+}
+
+.carousel {
+    border: 2px solid #283618;
+    overflow: hidden;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-gap: 10px;
+    @media screen and (min-width: 1200px) {
+        grid-template-columns: 1fr 5fr;
+        grid-template-rows: auto;
+    }
+}
+
+.nav-carousel {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    grid-row-start: 2;
+    @media screen and (min-width: 1200px) {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        display: block;
+        grid-row-start: auto;
+    }
+}
+
+.imageM>img {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: space-around;
+    width: 90%;
+    border: 2px solid #283618;
+    align-content: center;
+}
+
+nav>a {
+    display: flex;
+    min-width: 45vw;
+    margin-right: 10px;
+    @media screen and (min-width: 1200px) {
+        margin-bottom: 10px;
+        min-height: 200px;
+        min-width: 100%;
+    }
+}
+
+.nav-img {
+    border: 2px solid #283618;
+    object-fit: cover;
+    transition: 0.3s ease all;
+}
+
+.img-gallery {
+    border: 2px solid #283618;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    display: flex;
+    @media screen and (min-width: 1200px) {
+        display: block;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scroll-snap-type: y mandatory;
+    }
+}

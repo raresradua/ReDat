@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ReDAT</title>
+    <link rel="stylesheet" href="../documentation/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+</head>
+
+<body>
+    <article resource="#" typeof="schema:ScholarlyArticle">
+        <h1 property="schema:name"> ReDat Guide </h1>
+
+        <section>
+            <h2>Introducere </h2>
+            <p>Aplicatia noastra contine paginile SignIn, Monitor, API, dintre care vom prezenta cum poate fi folosita SignIn si Montior.
+            </p>
+        </section>
+
+        <section>
+            <h2>Logare User </h2>
+            <p>
+                Odata intrat pe aplicatie user-ul va apasa pe butonul de SignIn din dreapta paginii, se va loga cu contul sau de Reddit si va fi redirected catre pagina Monitor.
+            </p>
+        </section>
+
+        <section>
+            <h2>Dupa logare</h2>
+            <p>Folosind bara de navigatie, user-ul poate introduce de la tastatura sau din lista dropdown un subreddit la care este el abonat. Sau daca doreste parasirea aplicatiei, poate apasa pe butonul de LogOut.</p>
+
+            <h2>Statistici</h2>
+            <p>Ales un subreddit, se vor cauta in baza de date informatii legate de acel subreddit, daca nu sunt se va face request la API ul de la Reddit si vor fi generate pe pagina statistici aferente.</p>
+
+            <h2>Plot-uri</h2>
+            <p>Sunt generate plot-uri care vor putea fi downloadate fie in format SVG, colt dreapta sus este un buton de Download as SVG, sau in format CSV, sunt 3 butoane, cate unul pentru fiecare plot.</p>
+
+            <h2>API</h2>
+            <p>Utilizatorul poate folosi bara URL pentru a apela API ul care poate genera in format JSON informatii despre un subreddit prin /api/r/subreddit_nume sau poate genera informatii despre activitatea unui utilizator dintr-un anumit subreddit /api/r/subreddit_nume/username</p>
+
+        </section>
+    </article>
+</body>
+
+</html>
