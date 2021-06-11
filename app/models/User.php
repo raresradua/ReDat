@@ -40,7 +40,7 @@ class User
 
 
     public function topPostsExist($subreddit){
-        $this->db->query('SELECT * FROM subredditTopPosts WHERE subreddit=?');
+        $this->db->query('SELECT * FROM subreddittopposts WHERE subreddit=?');
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->execute();
         return $this->db->rowCount() !== 0;
@@ -48,14 +48,14 @@ class User
 
     public function getTopPosts($subreddit)
     {
-        $this->db->query("SELECT * FROM subredditTopPosts WHERE subreddit=?");
+        $this->db->query("SELECT * FROM subreddittopposts WHERE subreddit=?");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         return $this->db->resultSet();
     }
 
     public function addTopPost($subreddit, $score, $num_comments, $permalink, $title, $author)
     {
-        $this->db->query("INSERT INTO subredditTopPosts (subreddit, score, num_comments, permalink, title, author) VALUES (?, ?, ?, ?, ?, ?)");
+        $this->db->query("INSERT INTO subreddittopposts (subreddit, score, num_comments, permalink, title, author) VALUES (?, ?, ?, ?, ?, ?)");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->bind(2, $score, PDO::PARAM_INT);
         $this->db->bind(3, $num_comments, PDO::PARAM_INT);
@@ -66,7 +66,7 @@ class User
     }
 
     public function subredditInfoExists($subreddit){
-        $this->db->query('SELECT * FROM subredditInfo WHERE subreddit=?');
+        $this->db->query('SELECT * FROM subredditinfo WHERE subreddit=?');
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->execute();
         return $this->db->rowCount() !== 0;
@@ -74,14 +74,14 @@ class User
 
     public function getSubredditInfo($subreddit)
     {
-        $this->db->query("SELECT * FROM subredditInfo WHERE subreddit=?");
+        $this->db->query("SELECT * FROM subredditinfo WHERE subreddit=?");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         return $this->db->resultSet();
     }
 
     public function addSubredditInfo($subreddit, $title, $public_description, $subscribers,
                                      $active_user_count, $today_upvotes, $today_comments, $today_posts){
-        $this->db->query("INSERT INTO subredditInfo (subreddit, title, public_description, subscribers, active_user_count, today_upvotes, today_comments, today_posts) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $this->db->query("INSERT INTO subredditinfo (subreddit, title, public_description, subscribers, active_user_count, today_upvotes, today_comments, today_posts) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->bind(2, $title, PDO::PARAM_STR);
         $this->db->bind(3, $public_description, PDO::PARAM_STR);
@@ -94,20 +94,20 @@ class User
     }
 
     public function commentsPerDayInitialized($subreddit){
-        $this->db->query('SELECT * FROM commentsPerDay WHERE subreddit=?');
+        $this->db->query('SELECT * FROM commentsperday WHERE subreddit=?');
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->execute();
         return $this->db->rowCount() !== 0;
     }
 
     public function getCommentsPerDay($subreddit){
-        $this->db->query("SELECT * FROM commentsPerDay WHERE subreddit=?");
+        $this->db->query("SELECT * FROM commentsperday WHERE subreddit=?");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         return $this->db->resultSet();
     }
 
     public function addCommentsPerDay($subreddit, $day, $numberOfComments){
-        $this->db->query("INSERT INTO commentsPerDay (subreddit, day, numberOfComments) VALUES (?, ?, ?)");
+        $this->db->query("INSERT INTO commentsperday (subreddit, day, numberOfComments) VALUES (?, ?, ?)");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->bind(2, $day, PDO::PARAM_STR);
         $this->db->bind(3, $numberOfComments, PDO::PARAM_INT);
@@ -115,20 +115,20 @@ class User
     }
 
     public function postsPerDayInitialized($subreddit){
-        $this->db->query('SELECT * FROM postsPerDay WHERE subreddit=?');
+        $this->db->query('SELECT * FROM postsperday WHERE subreddit=?');
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->execute();
         return $this->db->rowCount() !== 0;
     }
 
     public function getPostsPerDay($subreddit){
-        $this->db->query("SELECT * FROM postsPerDay WHERE subreddit=?");
+        $this->db->query("SELECT * FROM postsperday WHERE subreddit=?");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         return $this->db->resultSet();
     }
 
     public function addPostsPerDay($subreddit, $day, $numberOfPosts){
-        $this->db->query("INSERT INTO postsPerDay (subreddit, day, numberOfPosts) VALUES (?, ?, ?)");
+        $this->db->query("INSERT INTO postsperday (subreddit, day, numberOfPosts) VALUES (?, ?, ?)");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->bind(2, $day, PDO::PARAM_STR);
         $this->db->bind(3, $numberOfPosts, PDO::PARAM_INT);
@@ -136,41 +136,41 @@ class User
     }
 
     public function subredditModsInitialized($subreddit){
-        $this->db->query('SELECT * FROM subredditMods WHERE subreddit=?');
+        $this->db->query('SELECT * FROM subredditmods WHERE subreddit=?');
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->execute();
         return $this->db->rowCount() !== 0;
     }
 
     public function getSubredditMods($subreddit){
-        $this->db->query("SELECT * FROM subredditMods WHERE subreddit=?");
+        $this->db->query("SELECT * FROM subredditmods WHERE subreddit=?");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         return $this->db->resultSet();
     }
 
     public function addSubredditMod($subreddit, $name)
     {
-        $this->db->query("INSERT INTO subredditMods (subreddit, name) VALUES (?, ?)");
+        $this->db->query("INSERT INTO subredditmods (subreddit, name) VALUES (?, ?)");
         $this->db->bind(1, $subreddit,PDO::PARAM_STR);
         $this->db->bind(2, $name,PDO::PARAM_STR);
         $this->db->execute();
     }
 
     public function subredditRecentCommentsInitialized($subreddit){
-        $this->db->query('SELECT * FROM subredditRecentComments WHERE subreddit=?');
+        $this->db->query('SELECT * FROM subredditrecentcomments WHERE subreddit=?');
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->execute();
         return $this->db->rowCount() !== 0;
     }
 
     public function getSubredditRecentComments($subreddit){
-        $this->db->query("SELECT * FROM subredditRecentComments WHERE subreddit=?");
+        $this->db->query("SELECT * FROM subredditrecentcomments WHERE subreddit=?");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         return $this->db->resultSet();
     }
 
     public function addSubredditRecentComment($subreddit, $author, $created_utc, $body=""){
-        $this->db->query("INSERT INTO subredditRecentComments (subreddit, author, created_utc, body) VALUES (?, ?, ?, ?)");
+        $this->db->query("INSERT INTO subredditrecentcomments (subreddit, author, created_utc, body) VALUES (?, ?, ?, ?)");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->bind(2, $author, PDO::PARAM_STR);
         $this->db->bind(3, $created_utc, PDO::PARAM_INT);
@@ -180,20 +180,20 @@ class User
     }
 
     public function subredditRecentPostsInitialized($subreddit){
-        $this->db->query('SELECT * FROM subredditRecentPosts WHERE subreddit=?');
+        $this->db->query('SELECT * FROM subredditrecentposts WHERE subreddit=?');
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->execute();
         return $this->db->rowCount() !== 0;
     }
 
     public function getSubredditRecentPosts($subreddit){
-        $this->db->query("SELECT * FROM subredditRecentPosts WHERE subreddit=?");
+        $this->db->query("SELECT * FROM subredditrecentposts WHERE subreddit=?");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         return $this->db->resultSet();
     }
 
     public function addSubredditRecentPost($subreddit, $author, $title, $full_link, $created_utc, $selftext){
-        $this->db->query("INSERT INTO subredditRecentPosts (subreddit, author, title, full_link, created_utc, selftext) VALUES (?, ?, ?, ?, ?, ?)");
+        $this->db->query("INSERT INTO subredditrecentposts (subreddit, author, title, full_link, created_utc, selftext) VALUES (?, ?, ?, ?, ?, ?)");
         $this->db->bind(1, $subreddit, PDO::PARAM_STR);
         $this->db->bind(2, $author, PDO::PARAM_STR);
         $this->db->bind(3, $title, PDO::PARAM_STR);
